@@ -36,104 +36,104 @@ interface Project {
 
 const devProjects: Project[] = [
   {
-    id: 1,
-    title: "Weather Dashboard App",
-    description: "Interactive weather application built with React and TailwindCSS, featuring location detection, 7-day forecasts, and interactive charts.",
-    type: "development",
-    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=1965",
-    links: {
-      live: "#",
-      github: "#"
+    "id": 1,
+    "title": "Blueking's Harmony",
+    "description": "A color palette generator with HEX and RGB values, color picking, and image upload support. Built for designers to create beautiful palettes easily.",
+    "type": "development",
+    "image": "https://images.unsplash.com/photo-1749794913656-85ec4538473e?q=80&w=2153&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "links": {
+      "live": "https://blueking-harmony.vercel.app/",
+      "github": "https://github.com/Godofmachine/blueking-harmony"
     },
-    skills: ["React", "TailwindCSS", "API Integration", "Responsive Design"]
+    "skills": ["React", "Color Picker", "Palette Generator", "Color Extraction", "Image Upload", "UI Design"]
   },
   {
-    id: 2,
-    title: "Photography Portfolio",
-    description: "End-to-end development of a photography portfolio website with custom animations and a dynamic gallery system.",
-    type: "development",
-    image: "https://images.unsplash.com/photo-1552168324-d612d77725e3?q=80&w=2036",
-    links: {
-      live: "#",
-      github: "#"
+    "id": 2,
+    "title": "Gista",
+    "description": "A data‑driven campaign management platform empowering political, advocacy, and non‑profit teams to manage and optimize outreach using real-time insights.",
+    "type": "development",
+    "image": "https://images.unsplash.com/photo-1749797119636-8539e84699ee?q=80&w=2113&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "links": {
+      "live": "https://www.gista.africa/",
+      "github": "https://github.com/Godofmachine/Gista-Temporary-landing-page"
     },
-    skills: ["React", "Framer Motion", "CSS Grid", "TypeScript"]
+    "skills": ["Data Analytics", "Campaign Management", "API Integration", "Dashboard UI", "User Auth"]
   },
   {
-    id: 3,
-    title: "Task Management App",
-    description: "Full-stack task management application with authentication, real-time updates, and drag-and-drop functionality.",
-    type: "development",
-    image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=2072",
-    links: {
-      live: "#",
-      github: "#"
+    "id": 3,
+    "title": "Blueking Temp-Mail",
+    "description": "A simple, disposable temporary email solution built with React. Instantly generate a burner email address to receive messages without login, ideal for testing or spam protection.",
+    "type": "development",
+    "image": "https://images.unsplash.com/photo-1749803298033-1f419967370f?q=80&w=2113&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "links": {
+      "live": "https://blueking-tempmail.vercel.app/",
+      "github": "https://github.com/Godofmachine/blueking-tempmail"
     },
-    skills: ["Next.js", "MongoDB", "Socket.io", "Tailwind"]
+    "skills": ["React", "Vite", "Temporary Email API", "Clipboard Copy", "Responsive Design"]
   },
   {
-    id: 4,
-    title: "E-commerce Platform",
-    description: "Responsive e-commerce platform with product filtering, user authentication, and payment integration.",
-    type: "development",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070",
-    links: {
-      live: "#",
-      github: "#"
+    "id": 4,
+    "title": "Fashion Nexus",
+    "description": "An e-commerce fashion app built with Next.js and TailwindCSS, showcasing clothing products with category browsing, responsive UI, and shopping interactions.",
+    "type": "development",
+    "image": "https://images.unsplash.com/photo-1749803297952-824c7c9a4623?q=80&w=2113&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "links": {
+      "live": "https://blueking-fashion.vercel.app/",
+      "github": "https://github.com/Godofmachine/fashion-nexus"
     },
-    skills: ["React", "Redux", "Node.js", "Stripe API"]
+    "skills": ["Next.js", "TailwindCSS", "React", "API Integration", "Supabase", "E‑commerce UI"]
   }
 ];
 
 const motionProjects: Project[] = [
   {
-    id: 5,
-    title: "Brand Animation Showcase",
-    description: "Dynamic brand animation featuring logo reveals, kinetic typography, and smooth transitions for corporate identity.",
-    type: "motion",
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2039",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    links: {
-      behance: "#"
+    "id": 5,
+    "title": "Cleve Interiors Logo Reveal",
+    "description": "A smooth and elegant animated logo reveal designed for Cleve Interiors, blending modern motion graphics with minimalist design elements to reflect the brand’s interior design ethos.",
+    "type": "motion",
+    "image": "https://images.unsplash.com/photo-1749814138080-31b85b70479c?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "videoUrl": "https://res.cloudinary.com/dsemtlthg/video/upload/f_auto:video,q_auto/v1/Portfolio/hkghsrbj5togpntxwdzc",
+    "links": {
+      "live": "#"
     },
-    skills: ["After Effects", "Cinema 4D", "Motion Graphics", "Brand Design"]
+    "skills": ["After Effects", "Logo Animation", "Motion Graphics", "Brand Identity"]
   },
   {
-    id: 6,
-    title: "Product Demo Video",
-    description: "Engaging product demonstration with 3D elements, animated infographics, and compelling visual storytelling.",
-    type: "motion",
-    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2070",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    links: {
-      behance: "#"
+    "id": 6,
+    "title": "Cleve Interiors Logo Reveal II",
+    "description": "A second stylistic logo animation for Cleve Interiors, combining subtle motion and refined typography to reinforce the brand’s clean, modern identity in the interior design space.",
+    "type": "motion",
+    "image": "https://images.unsplash.com/photo-1749814138080-31b85b70479c?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "videoUrl": "https://res.cloudinary.com/dsemtlthg/video/upload/f_auto:video,q_auto/v1/Portfolio/ulhonafwwbn1geowf5ly",
+    "links": {
+      "live": "#"
     },
-    skills: ["After Effects", "Illustrator", "3D Animation", "Video Editing"]
-  },
-  {
-    id: 7,
-    title: "Social Media Campaign",
-    description: "Series of animated social media content with vibrant colors, dynamic transitions, and engaging micro-interactions.",
-    type: "motion",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2074",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    links: {
-      behance: "#"
-    },
-    skills: ["After Effects", "Premiere Pro", "Social Media", "Animation"]
-  },
-  {
-    id: 8,
-    title: "Title Sequence Design",
-    description: "Cinematic title sequence with custom typography, particle effects, and atmospheric mood setting.",
-    type: "motion",
-    image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=2062",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    links: {
-      behance: "#"
-    },
-    skills: ["After Effects", "Typography", "VFX", "Sound Design"]
+    "skills": ["After Effects", "Logo Animation", "Minimal Design", "Motion Graphics"]
   }
+  // {
+  //   id: 7,
+  //   title: "Social Media Campaign",
+  //   description: "Series of animated social media content with vibrant colors, dynamic transitions, and engaging micro-interactions.",
+  //   type: "motion",
+  //   image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2074",
+  //   videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+  //   links: {
+  //     behance: "#"
+  //   },
+  //   skills: ["After Effects", "Premiere Pro", "Social Media", "Animation"]
+  // },
+  // {
+  //   id: 8,
+  //   title: "Title Sequence Design",
+  //   description: "Cinematic title sequence with custom typography, particle effects, and atmospheric mood setting.",
+  //   type: "motion",
+  //   image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=2062",
+  //   videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+  //   links: {
+  //     behance: "#"
+  //   },
+  //   skills: ["After Effects", "Typography", "VFX", "Sound Design"]
+  // }
 ];
 
 const ProjectsSection = () => {
@@ -160,8 +160,12 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" className="py-20 px-4 md:px-8 lg:px-16 bg-zinc-50">
+    <section id="projects" className="py-20 px-4 md:px-8 lg:px-16 bg-transparent">
+      {/* Background decorative elements */}
+      <div className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
       <div className="max-w-6xl mx-auto">
+
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -183,15 +187,15 @@ const ProjectsSection = () => {
           className="mb-10"
         >
           <Tabs defaultValue="development" className="w-full" onValueChange={setActiveTab}>
-            <TabsList className="mx-auto flex justify-center mb-8 bg-white/80 backdrop-blur-sm p-1 rounded-full border border-zinc-200">
-              <TabsTrigger value="development" className="rounded-full px-6 py-2 text-sm">
-                <Code size={16} className="mr-1" /> Development
+            <TabsList className="mx-auto w-full flex justify-center mb-8 bg-white/80 backdrop-blur-sm p-2 sm:px-2 md:p-3 rounded-full border border-zinc-200 shadow-sm gap-1 sm:gap-2">
+              <TabsTrigger value="development" className="rounded-full p-2 lg:px-6 py-2 text-xs sm:text-sm md:text-sm font-medium transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white data-[state=active]:shadow-sm hover:bg-zinc-100 data-[state=active]:hover:bg-zinc-900">
+                <Code size={14} className="mr-1 sm:mr-2" /> Development
               </TabsTrigger>
-              <TabsTrigger value="design" className="rounded-full px-6 py-2 text-sm">
-                <Palette size={16} className="mr-1" /> Graphic Design
+              <TabsTrigger value="design" className="rounded-full p-2 sm:px-2 lg:px-6 py-2 text-xs sm:text-sm md:text-sm font-medium transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white data-[state=active]:shadow-sm hover:bg-zinc-100 data-[state=active]:hover:bg-zinc-900">
+                <Palette size={14} className="mr-1 sm:mr-2" /> Graphic Design
               </TabsTrigger>
-              <TabsTrigger value="motion" className="rounded-full px-6 py-2 text-sm">
-                <Video size={16} className="mr-1" /> Motion Graphics
+              <TabsTrigger value="motion" className="rounded-full p-2 lg:px-6 py-2 text-xs sm:text-sm md:text-sm font-medium transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white data-[state=active]:shadow-sm hover:bg-zinc-100 data-[state=active]:hover:bg-zinc-900">
+                <Video size={14} className="mr-1 sm:mr-2" /> Motion Graphics
               </TabsTrigger>
             </TabsList>
 
@@ -259,7 +263,7 @@ const ProjectsSection = () => {
                 ))}
               </div>
               <div className="mt-12 flex justify-center gap-4">
-                <Button 
+                {/* <Button 
                   asChild
                   size="lg"
                   className="bg-zinc-900 hover:bg-zinc-800 transition-colors duration-300 text-white rounded-full"
@@ -267,7 +271,7 @@ const ProjectsSection = () => {
                   <a href="https://behance.net/yourusername" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <Video size={18} /> View Full Motion Gallery
                   </a>
-                </Button>
+                </Button> */}
                 <Button 
                   onClick={() => handleBookingClick('motion')}
                   size="lg" 

@@ -17,7 +17,7 @@ export default function RootLayout({
       <head>
         {/* <link rel="stylesheet" href="/css/face-style.css" /> */}
       </head>
-      <body>
+      <body className="w-screen overflow-x-hidden">
         <Providers>
           {children}
         </Providers>

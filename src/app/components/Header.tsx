@@ -74,13 +74,14 @@ const Header: React.FC = () => {
       {/* Download Resume Button */}
       <div className="flex items-center group max-xl:ml-auto mr-2 md:mr-8">
         <a 
-          href="/resume.pdf" 
+          href="/My Resume.pdf" 
           download
-          className="flex items-center relative overflow-hidden bg-white/10 hover:bg-white/20 duration-300 ease-out translate-all rounded-full pl-4 lg:pl-6 pr-2 py-2"
+          target='blank'
+          className="flex items-center relative overflow-hidden bg-white/10 hover:bg-white/20 duration-300 ease-out translate-all rounded-full pl-2 sm:pl-4 lg:pl-6 pr-2 py-1.5 sm:py-2"
         >
-          <div className="text-white text-sm sm:text-base font-medium pl-2 lg:pl-4 pr-4 lg:pr-8 relative z-10">Download Resume</div>
-          <div className="ml-auto rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center relative z-10">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-6 sm:h-6">
+          <div className="text-white text-xs sm:text-sm lg:text-base font-medium pl-1 sm:pl-2 lg:pl-4 pr-2 sm:pr-4 lg:pr-8 relative z-10">Download Resume</div>
+          <div className="ml-auto rounded-full w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 flex items-center justify-center relative z-10">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6">
               <path d="M12 16L12 8M12 16L8 12M12 16L16 12M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
@@ -106,14 +107,15 @@ const Header: React.FC = () => {
       {/* Logo */}
       <div className="items-center flex justify-start z-[300]">
         <div className="lg:py-2 w-full flex">
-          <Link href="/" className="text-white text-2xl font-bold">Portfolio</Link>
+        <Link href="/" className=""> <img src="/logo-bw.png" alt="logo" className='w-32' />
+        </Link>
           {/* Desktop Navigation */}
           <div className={`xl:flex ${mobileMenuOpen ? 'hidden' : 'hidden'} flex-col xl:flex-row items-center text-nowrap space-y-4 lg:space-y-0 space-x-2 xl:space-x-8 w-full ms-5 2xl:ms-24 lg:w-auto mt-4 lg:mt-0`}>
-            <Link href="/" className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Home</Link>
-            <Link href="/about" className="text-white text-md xl:text-lg font-medium hover:text-gray-300">About</Link>
-            <Link href="/projects" className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Projects</Link>
-            <Link href="/skills" className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Skills</Link>
-            <Link href="/contact" className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Contact</Link>
+            <a href="#home" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Home</a>
+            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">About</a>
+            <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Projects</a>
+            <a href="#skills-section" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Skills</a>
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Contact</a>
           </div>
         </div>
       </div>
@@ -126,7 +128,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <div ref={headerRef} className="w-full relative bg-[#111]">
+      <div ref={headerRef} className="w-full relative bg-zinc-900">
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div
@@ -134,16 +136,18 @@ const Header: React.FC = () => {
             onClick={() => setMobileMenuOpen(false)}
           >
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40 z-[10000]" />
+            <div className="absolute inset-0 bg-black/40 z-[10000] lg-hidden" />
             {/* Drawer */}
             <div
-              className="relative w-2/3 h-full bg-[#111] z-[10000] flex flex-col"
+              className="relative w-2/3 h-full bg-[#111] z-[10000] lg-hidden flex flex-col"
               onClick={e => e.stopPropagation()}
             >
               {/* Mobile menu header with logo and close button */}
               <div className="flex justify-between items-center p-4 border-b border-gray-800">
-                <div className="py-2">
-                  <Link href="/" className="text-white text-2xl font-bold">Portfolio</Link>
+                <div className="py-2 flex">
+                 
+                  <Link href="/" className=""> <img src="/logo-bw.png" alt="logo" className='w-28' />
+                  </Link>
                 </div>
                 <button 
                   className="rounded-md p-2 text-white"
@@ -160,31 +164,31 @@ const Header: React.FC = () => {
                 <nav className="py-2">
                   <div className="border-b border-gray-800" key="home">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <Link href="/" className="text-white text-lg font-medium">Home</Link>
+                      <a href="#home" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Home</a>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="about">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <Link href="/about" className="text-white text-lg font-medium">About</Link>
+                      <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">About</a>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="projects">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <Link href="/projects" className="text-white text-lg font-medium">Projects</Link>
+                      <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Projects</a>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="skills">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <Link href="/skills" className="text-white text-lg font-medium">Skills</Link>
+                      <a href="#skills-section" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Skills</a>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="contact">
                     <div className="px-6 py-4">
-                      <Link href="/contact" className="text-white text-lg font-medium">Contact</Link>
+                      <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Contact</a>
                     </div>
                   </div>
                 </nav>
@@ -216,106 +220,6 @@ const Header: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Search Modal UI */}
-      {isSearchModalOpen && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-2xl shadow-xl relative w-full max-w-2xl mx-4">
-            {/* Search Header */}
-            <div className="p-4 border-b">
-              <div className="relative flex">
-                <input
-                  type="text"
-                  placeholder="Search for products, blog posts, or services..."
-                  className="w-full px-4 py-3 pl-12 text-gray-900 bg-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#278d45]"
-                />
-                <button
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#278d45]"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => setIsSearchModalOpen(false)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#278d45]"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Search Tabs */}
-            <div className="flex border-b">
-              <button className="flex-1 py-3 text-sm font-medium text-[#278d45] border-b-2 border-[#278d45]">
-                All
-              </button>
-              <button className="flex-1 py-3 text-sm font-medium text-gray-500">
-                Products
-              </button>
-              <button className="flex-1 py-3 text-sm font-medium text-gray-500">
-                Blog
-              </button>
-              <button className="flex-1 py-3 text-sm font-medium text-gray-500">
-                Services
-              </button>
-            </div>
-
-            {/* Search Content */}
-            <div className="max-h-[60vh] overflow-y-auto p-4">
-              {/* Recent Searches */}
-              <div className="mb-6">
-                <h3 className="text-sm font-medium text-gray-500 mb-3">Recent Searches</h3>
-                <div className="space-y-2">
-                  <button className="flex items-center w-full p-2 hover:bg-gray-50 rounded-lg">
-                    <svg className="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-14 0 9 9 0 0114 0z" />
-                    </svg>
-                    <span className="text-gray-700">organic feed</span>
-                  </button>
-                  <button className="flex items-center w-full p-2 hover:bg-gray-50 rounded-lg">
-                    <svg className="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-14 0 9 9 0 0114 0z" />
-                    </svg>
-                    <span className="text-gray-700">livestock care</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Popular Searches */}
-              <div>
-                <h3 className="text-sm font-medium text-gray-500 mb-3">Popular Searches</h3>
-                <div className="flex flex-wrap gap-2">
-                  <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-sm text-gray-700">
-                    Animal Feed
-                  </button>
-                  <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-sm text-gray-700">
-                    Veterinary Services
-                  </button>
-                  <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-sm text-gray-700">
-                    Farm Equipment
-                  </button>
-                  <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-sm text-gray-700">
-                    Livestock Care
-                  </button>
-                </div>
-              </div>
-
-              {/* Search Tips */}
-              <div className="mt-6 text-center py-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Search Tips</h3>
-                <ul className="text-sm text-gray-500 space-y-1">
-                  <li>• Search for products by name, brand, or category</li>
-                  <li>• Find blog posts about farming and livestock</li>
-                  <li>• Discover our services and expertise</li>
-                  <li>• Use specific keywords for better results</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

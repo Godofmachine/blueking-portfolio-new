@@ -13,22 +13,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="clearfix" style="display: none;">
+<body class="clearfix bg" style="display: block;">
     <div id="content" class="content clearfix home">
         <section id="section" class="light nopad-t nopad-b">
             <div class="row">
                 <div class="col-12">
                     <div id="face" class="face">
-                        <a href="portfolio.html">
+                        <a href="#" onclick="window.parent.postMessage('scrollToDesign', '*'); return false;">
                             <div id="designer" class="designer">
                                 <div id="designer-desc" class="description">
                                     <h1>designer</h1>
-                                    <p>Product designer specialising in UI design and design systems.</p>
+                                    <p>Graphic designer specialising in Branding and PR design systems.</p>
                                 </div>
                             </div>
                         </a>
 
-                        <a href="about.html">
+                        <a href="#" onclick="window.parent.postMessage('scrollToDevelopment', '*'); return false;">
                             <div id="coder" class="coder">
                                 <div id="coder-desc" class="description">
                                     <h1><span class="chevron-left">&lt;</span>dev<span class="chevron-right">&gt;</span></h1>

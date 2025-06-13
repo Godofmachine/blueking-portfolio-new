@@ -4,6 +4,10 @@ import { Separator } from "../components/ui/separator";
 const AboutSection = () => {
   return (
     <section id="about" className="py-20 px-4 md:px-8 lg:px-16 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+      
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 relative">
           About Me
@@ -65,9 +69,36 @@ const AboutSection = () => {
                 </p>
               </div>
             </div>
+
+           
           </div>
+           
         </div>
+        
       </div>
+      <div className="mt-12 flex justify-center items-center w-full">
+              <a
+                href="/My Resume.pdf"
+                download
+                className="flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-gray-800 to-zinc-500 text-white font-medium hover:from-gray-700 hover:to-zinc-400 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  />
+                </svg>
+                Download Resume
+              </a>
+            </div>
     </section>
   );
 };

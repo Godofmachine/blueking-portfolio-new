@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Github, Linkedin, Twitter, Coffee, X } from 'lucide-react';
+import { Github, Linkedin, Twitter, Coffee, X, Instagram } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -32,16 +32,16 @@ const Footer = () => {
           <div className="flex items-center gap-4">
             {/* Social Media Links */}
             <div className="flex items-center gap-3">
-              <a 
+              {/* <a 
                 href="https://github.com/godofmachine" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-gray-800 rounded-lg"
                 aria-label="GitHub"
               >
-                <Github size={20} />
-              </a>
-              <a 
+                <Instagram size={20} />
+              </a> */}
+              {/* <a 
                 href="https://linkedin.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -49,9 +49,18 @@ const Footer = () => {
                 aria-label="LinkedIn"
               >
                 <Linkedin size={20} />
+              </a> */}
+              <a 
+                href="https://github.com/Godofmachine" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-gray-800 rounded-lg"
+                aria-label="Github"
+              >
+                <Github size={20} />
               </a>
               <a 
-                href="https://twitter.com" 
+                href="https://x.com/Blueking_I" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-gray-800 rounded-lg"

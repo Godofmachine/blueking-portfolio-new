@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 export default function Home() {
   return (
     
-    <main className='w-full min-h-screen'>
+    <main className='w-full min-h-screen overflow-x-hidden'>
       <Header />
 
       <HeroIframe />

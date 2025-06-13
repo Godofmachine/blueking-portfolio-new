@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../components/ui/dialog';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { ChevronLeft, ChevronRight, Check, Calendar, DollarSign, MessageSquare, User, Building, ChevronDown, AlertCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Check, Calendar, DollarSign, MessageSquare, User, Building, ChevronDown, AlertCircle, Phone, Globe } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
 
 type ServiceType = 'development' | 'design' | 'motion';
 
@@ -17,6 +18,9 @@ interface FormData {
   name: string;
   email: string;
   company: string;
+  phone: string;
+  country: string;
+  countryCode: string;
   budget: string;
   timeline: string;
   description: string;
@@ -27,11 +31,32 @@ interface FormData {
 interface FormErrors {
   name?: string;
   email?: string;
+  phone?: string;
+  country?: string;
   description?: string;
   requirements?: string;
   budget?: string;
   timeline?: string;
 }
+
+// Country data with codes
+const countries = [
+  { name: 'Nigeria', code: 'NG', dialCode: '+234' },
+  { name: 'United States', code: 'US', dialCode: '+1' },
+  { name: 'United Kingdom', code: 'GB', dialCode: '+44' },
+  { name: 'Canada', code: 'CA', dialCode: '+1' },
+  { name: 'Ghana', code: 'GH', dialCode: '+233' },
+  { name: 'South Africa', code: 'ZA', dialCode: '+27' },
+  { name: 'Kenya', code: 'KE', dialCode: '+254' },
+  { name: 'India', code: 'IN', dialCode: '+91' },
+  { name: 'Australia', code: 'AU', dialCode: '+61' },
+  { name: 'Germany', code: 'DE', dialCode: '+49' },
+  { name: 'France', code: 'FR', dialCode: '+33' },
+  { name: 'China', code: 'CN', dialCode: '+86' },
+  { name: 'Japan', code: 'JP', dialCode: '+81' },
+  { name: 'Brazil', code: 'BR', dialCode: '+55' },
+  { name: 'Mexico', code: 'MX', dialCode: '+52' },
+];
 
 const serviceConfig = {
   development: {
@@ -55,17 +80,22 @@ const serviceConfig = {
 };
 
 const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, serviceType }) => {
+  const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     company: '',
+    phone: '',
+    country: 'Nigeria',
+    countryCode: '+234',
     budget: '',
     timeline: '',
     description: '',
     requirements: [],
     otherRequirement: ''
   });
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -84,6 +114,14 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, serviceTyp
           newErrors.email = 'Email is required';
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
           newErrors.email = 'Please enter a valid email address';
+        }
+        if (!formData.phone.trim()) {
+          newErrors.phone = 'Phone number is required';
+        } else if (!/^[\d\s-]{7,}$/.test(formData.phone)) {
+          newErrors.phone = 'Please enter a valid phone number';
+        }
+        if (!formData.country) {
+          newErrors.country = 'Country is required';
         }
         break;
 
@@ -137,6 +175,15 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, serviceTyp
     }));
   };
 
+  const handleCountrySelect = (country: typeof countries[0]) => {
+    setFormData(prev => ({
+      ...prev,
+      country: country.name,
+      countryCode: country.dialCode
+    }));
+    setShowCountryDropdown(false);
+  };
+
   const handleSubmit = async () => {
     if (!validateStep(currentStep)) {
       return;
@@ -146,15 +193,62 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, serviceTyp
     setSubmitError(null);
 
     try {
-      // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      onClose();
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: 'ad1363bd-b83b-4595-b733-c0ceb046086b',
+          name: formData.name,
+          email: formData.email,
+          subject: `New ${config.title} Booking Request`,
+          message: `
+New Booking Request Details:
+
+Service Type: ${config.title}
+
+Contact Information:
+- Name: ${formData.name}
+- Email: ${formData.email}
+- Phone: ${formData.countryCode} ${formData.phone}
+- Country: ${formData.country}
+- Company: ${formData.company || 'Not provided'}
+
+Project Details:
+- Description: ${formData.description}
+
+Requirements:
+${formData.requirements.map(req => `- ${req}`).join('\n')}
+${formData.otherRequirement ? `\nOther Requirements:\n- ${formData.otherRequirement}` : ''}
+
+Timeline & Budget:
+- Budget Range: ${formData.budget}
+- Timeline: ${formData.timeline}
+          `.trim(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast({
+          title: "Booking request sent!",
+          description: "Thanks for your interest. I'll get back to you soon!",
+          className: "z-[9999]"
+        });
+        onClose();
+      } else {
+        throw new Error(data.message);
+      }
     } catch (error) {
       setSubmitError('Failed to submit the form. Please try again.');
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+        className: "z-[9999]"
+      });
       console.error('Submission error:', error);
     } finally {
       setIsSubmitting(false);
@@ -206,8 +300,9 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, serviceTyp
             switch (currentStep) {
               case 0:
                 return (
-                  <div className="space-y-6 ">
+                  <div className="space-y-6">
                     <div className="relative">
+                      <input type="text" value={"Booking Form"} className='hidden' disabled readOnly/>
                       <label className="block text-sm font-medium mb-2 text-gray-700">Full Name *</label>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
@@ -249,6 +344,72 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, serviceTyp
                       </div>
                       {renderError(errors.email)}
                     </div>
+
+                    <div className="grid grid-cols-12 gap-4">
+                      <div className="col-span-4 relative">
+                        <label className="block text-sm font-medium mb-2 text-gray-700">Country *</label>
+                        <div className="relative">
+                          <Globe className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                          <button
+                            type="button"
+                            onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                            className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-designer-purple focus:border-transparent transition-all text-left ${
+                              errors.country ? 'border-red-500' : 'border-gray-200'
+                            }`}
+                          >
+                            {formData.country}
+                          </button>
+                          <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                          
+                          {showCountryDropdown && (
+                            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-auto">
+                              {countries.map((country) => (
+                                <button
+                                  key={country.code}
+                                  type="button"
+                                  onClick={() => handleCountrySelect(country)}
+                                  className="w-full px-4 py-2 text-left hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                                >
+                                  {country.name} ({country.dialCode})
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        {renderError(errors.country)}
+                      </div>
+
+                      <div className="col-span-8 relative">
+                        <label className="block text-sm font-medium mb-2 text-gray-700">Phone Number *</label>
+                        <div className="relative flex">
+                          <div className="relative">
+                            <input
+                              type="text"
+                              value={formData.countryCode}
+                              readOnly
+                              className="w-24 pl-10 pr-2 py-3 border border-r-0 border-gray-200 rounded-l-xl focus:outline-none bg-gray-50"
+                            />
+                            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                          </div>
+                          <input
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => {
+                              setFormData(prev => ({ ...prev, phone: e.target.value }));
+                              if (errors.phone) {
+                                setErrors(prev => ({ ...prev, phone: undefined }));
+                              }
+                            }}
+                            className={`flex-1 pl-4 pr-4 py-3 border rounded-r-xl focus:outline-none focus:ring-2 focus:ring-designer-purple focus:border-transparent transition-all ${
+                              errors.phone ? 'border-red-500' : 'border-gray-200'
+                            }`}
+                            placeholder="Enter your phone number"
+                          />
+                        </div>
+                        {renderError(errors.phone)}
+                      </div>
+                    </div>
+
                     <div className="relative">
                       <label className="block text-sm font-medium mb-2 text-gray-700">Company/Organization</label>
                       <div className="relative">

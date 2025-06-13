@@ -1,12 +1,25 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 
 const SkillsSection = () => {
   const [activeTab, setActiveTab] = useState("design");
   
+  useEffect(() => {
+    const handleTabChange = (event: CustomEvent) => {
+      if (event.detail === 'design' || event.detail === 'development') {
+        setActiveTab(event.detail);
+      }
+    };
+
+    document.addEventListener('changeTab', handleTabChange as EventListener);
+    return () => {
+      document.removeEventListener('changeTab', handleTabChange as EventListener);
+    };
+  }, []);
+
   const designSkills = [
     { name: "Brand Identity", level: 95, color: "bg-zinc-700" },
     { name: "Typography", level: 90, color: "bg-gray-600" },
@@ -39,7 +52,7 @@ const SkillsSection = () => {
     { name: "V0", category: "dev" },
     { name: "Tailwind CSS", category: "dev" },
     { name: "Framer Motion", category: "dev" },
-    { name: "Illust rator", category: "design" }
+    { name: "Illustrator", category: "design" }
   ];
   
   const filteredTools = tools.filter(tool => {
@@ -49,7 +62,10 @@ const SkillsSection = () => {
   });
 
   return (
-    <section className="py-20 px-4 md:px-8 lg:px-16 bg-gray-50 relative">
+    <section id="skills-section" className="py-20 px-4 md:px-8 lg:px-16 bg-gray-50 relative">
+            {/* Background decorative elements */}
+            <div className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent"></div>
@@ -59,7 +75,7 @@ const SkillsSection = () => {
           Skills & Expertise
         </h2>
         
-        <Tabs defaultValue="design" onValueChange={setActiveTab} className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
             <TabsTrigger value="design">Design</TabsTrigger>
             <TabsTrigger value="development">Development</TabsTrigger>
