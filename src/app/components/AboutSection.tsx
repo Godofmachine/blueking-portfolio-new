@@ -24,13 +24,13 @@ const AboutSection = () => {
                   {/* <div className="font-mono text-4xl text-zinc-950 font-semibold">AS</div> */}
                 </div>
               </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 blob bg-yellow-400 opacity-75 animate-bounce"></div>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 blob bg-yellow-400 opacity-75 animate-bounce "></div>
             </div>
             
             <h3 className="text-xl font-bold font-display mb-1">Adeniran Samuel</h3>
             <p className="text-gray-600 mb-4">Based in Ibadan, NGA</p>
             
-            <div className="grid grid-cols-2 gap-4 w-full">
+            <div className="grid grid-cols-2 items-center gap-4 w-full">
               <div className="bg-gray-50 p-3 rounded-lg">
                 <div className="text-sm text-gray-500">Experience</div>
                 <div className="text-lg font-semibold">4+ Years</div>
@@ -39,17 +39,41 @@ const AboutSection = () => {
                 <div className="text-sm text-gray-500">Projects</div>
                 <div className="text-lg font-semibold">120+</div>
               </div>
+              <div className="flex col-span-2 w-full">
+              <a
+                href="/My Resume.pdf"
+                download
+                className="flex items-center justify-center text-center text-xl w-full px-6 py-6 rounded-lg bg-gradient-to-r from-gray-800 to-zinc-500 text-white font-medium hover:from-gray-700 hover:to-zinc-400 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  />
+                </svg>
+                Download Resume
+              </a>
+            </div>
             </div>
           </div>
           
           {/* Right side with content */}
-          <div className="md:col-span-3">
-            <p className="text-lg mb-6">
-              I blend visual design with technical implementation to create meaningful digital experiences. With a background in traditional graphic design and a passion for frontend development, I inhabit the sweet spot between aesthetics and functionality.
-            </p>
+          <div className="md:col-span-3 px-2 lg:px-0">
+            <p className="text-md lg:text-lg mb-6">
+              Hi, I’m Blueking — I’m a graphic designer and front-end developer with a love for clean visuals and clean code.My journey began in print design, grew through branding, and now thrives in the digital space—where I combine visual creativity with technical skill to craft engaging digital experiences.            </p>
             
-            <p className="text-lg mb-6">
-              My journey began in print design, evolved through brand identity, and flourished in the digital realm. Today, I enjoy the challenge of not just designing interfaces but also implementing them with clean, efficient code.
+            <p className="text-md lg:text-lg mb-6">
+            Outside of design and code, I’m also studying law—drawn to the structure, logic, and impact it has on the real world. And when I’m not in front of a screen or buried in law texts, you’ll find me immersed in dramatic arts or football with full passion.            </p>
+            <p className="text-md lg:text-lg mb-6">
+            I build with intention—whether it’s an interface, a brand, or a future.
             </p>
             
             <Separator className="my-6" />
@@ -76,29 +100,7 @@ const AboutSection = () => {
         </div>
         
       </div>
-      <div className="mt-12 flex justify-center items-center w-full">
-              <a
-                href="/My Resume.pdf"
-                download
-                className="flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-gray-800 to-zinc-500 text-white font-medium hover:from-gray-700 hover:to-zinc-400 transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                <svg
-                  className="w-5 h-5 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
-                Download Resume
-              </a>
-            </div>
+      
     </section>
   );
 };

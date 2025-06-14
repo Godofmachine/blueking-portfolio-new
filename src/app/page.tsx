@@ -12,15 +12,20 @@ export default function Home() {
     
     <main className='w-full min-h-screen overflow-x-hidden'>
       <Header />
-
       <HeroIframe />
+
+    <div className=" px-2 lg:px-0">
       <HeroSection />
       <AboutSection />
       <SkillsSection />
       <ExperienceSection />
-      <ProjectsSection />
-      <ContactSection />
-      <Footer />
+    
+    </div> 
+    
+    <ProjectsSection />
+    <ContactSection />
+    <Footer />
+      
     </main>
   );
 }

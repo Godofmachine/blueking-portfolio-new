@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
+import { BackToTop } from "@/components/BackToTop";
 
 export const metadata: Metadata = {
   title: "Blueking",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className="w-screen overflow-x-hidden">
         <Providers>
           {children}
+          <BackToTop />
         </Providers>
       </body>
     </html>

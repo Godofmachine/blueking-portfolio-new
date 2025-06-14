@@ -59,7 +59,7 @@ const ExperienceSection = () => {
           ))}
         </div> */}
         
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="-mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
             <h3 className="text-lg font-semibold mb-4 font-display">Education</h3>
             <div className="mb-4">
