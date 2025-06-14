@@ -30,8 +30,8 @@ const ExperienceSection = () => {
   return (
     <section className="pb-20 px-4 md:px-8 lg:px-16 relative">
       {/* Background decorative elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+      {/* <div className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div> */}
       
       <div className="max-w-5xl mx-auto">
         {/* <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 relative">

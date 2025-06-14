@@ -162,8 +162,8 @@ const ProjectsSection = () => {
   return (
     <section id="projects" className="py-20 px-4 md:px-8 lg:px-16 bg-transparent">
       {/* Background decorative elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+      {/* <div className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div> */}
       <div className="max-w-6xl mx-auto">
 
         <motion.div 
