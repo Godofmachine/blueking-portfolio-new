@@ -23,8 +23,8 @@ const SkillsSection = () => {
   const designSkills = [
     { name: "Brand Identity", level: 95, color: "bg-zinc-700" },
     { name: "Typography", level: 90, color: "bg-gray-600" },
-    { name: "Illustration", level: 75, color: "bg-zinc-800" },
-    { name: "UI Design", level: 60, color: "bg-gray-700" },
+    { name: "Illustration", level: 95, color: "bg-zinc-800" },
+    { name: "UI Design", level: 70, color: "bg-gray-700" },
     { name: "Motion Graphics", level: 70, color: "bg-zinc-600" }
   ];
   
@@ -32,8 +32,10 @@ const SkillsSection = () => {
     { name: "HTML & CSS", level: 95, color: "bg-gray-600" },
     { name: "JavaScript", level: 88, color: "bg-zinc-700" },
     { name: "React", level: 90, color: "bg-gray-700" },
-    { name: "TypeScript", level: 78, color: "bg-zinc-800" },
-    { name: "Frontend Frameworks", level: 80, color: "bg-gray-600" }
+    { name: "Next Js", level: 90, color: "bg-zinc-800" },
+    { name: "Node Js", level: 90, color: "bg-gray-700" },
+    { name: "TypeScript", level: 78, color: "bg-zinc-600" },
+    { name: "Frontend Frameworks", level: 80, color: "bg-gray-800" }
   ];
   
   const tools = [
@@ -45,8 +47,10 @@ const SkillsSection = () => {
     { name: "Canva", category: "design" },
     { name: "Photopea", category: "design" },
     { name: "Pinterest", category: "design" },
+    { name: "NanoBanana", category: "design" },
+    { name: "VS Code", category: "dev" },    
+    { name: "Antigravity", category: "dev" },    
     { name: "Cursor", category: "dev" },
-    { name: "VS Code", category: "dev" },
     { name: "Git", category: "dev" },
     { name: "Copilot", category: "dev" },
     { name: "V0", category: "dev" },

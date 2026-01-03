@@ -116,10 +116,10 @@ const ExperienceSection = () => {
               <div>
                 <div className="flex justify-between mb-1">
                   <div>American Sign Language</div>
-                  <div className="text-gray-500">Basic</div>
+                  <div className="text-gray-500">Intermediate</div>
                 </div>
                 <div className="w-full bg-gray-200 h-1.5 rounded-full">
-                  <div className="bg-gray-500 h-full rounded-full w-2/5"></div>
+                  <div className="bg-gray-500 h-full rounded-full w-3/5"></div>
                 </div>
               </div>
             </div>
