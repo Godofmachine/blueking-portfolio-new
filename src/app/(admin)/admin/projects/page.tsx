@@ -755,7 +755,7 @@ export default function AdminProjectsPage() {
         </Button>
       </div>
 
-      <Tabs value={category} onValueChange={(v) => setCategory(v as AdminCategoryTab)}>
+      <Tabs value={category} onValueChange={(v: string) => setCategory(v as AdminCategoryTab)}>
         <TabsList className="w-full justify-start bg-white/80 dark:bg-zinc-900/50 border border-zinc-200/70 dark:border-zinc-800 rounded-full">
           <TabsTrigger value="all" className="rounded-full">
             All
