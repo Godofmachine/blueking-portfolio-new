@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import type { CheckedState } from "@radix-ui/react-checkbox";
 
 import type { Project, ProjectCategory } from "@lib/projects/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/tabs";
@@ -781,7 +782,7 @@ export default function AdminProjectsPage() {
                       <TableHead className="w-10">
                         <Checkbox
                           checked={allSelected ? true : someSelected ? "indeterminate" : false}
-                          onCheckedChange={(v) => toggleSelectAll(Boolean(v))}
+                          onCheckedChange={(v: CheckedState) => toggleSelectAll(Boolean(v))}
                           aria-label="Select all"
                         />
                       </TableHead>
