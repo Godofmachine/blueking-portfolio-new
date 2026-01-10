@@ -24,6 +24,7 @@ export async function GET(request: Request) {
   try {
     const result = await seedStaticProjectsToDb({
       categories: ["development", "motion"],
+      mode: "upsert",
     });
 
     return NextResponse.json(result);

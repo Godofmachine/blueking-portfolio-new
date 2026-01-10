@@ -8,8 +8,10 @@ export type SeedStaticProjectsResult = {
   categories: ProjectCategory[];
   considered: number;
   created: number;
+  updated: number;
   skipped: number;
   createdSlugs: string[];
+  updatedSlugs: string[];
 };
 
 function normalizeList(values: unknown): string[] {
@@ -28,8 +30,10 @@ function buildSeedList(categories: ProjectCategory[]): Project[] {
 
 export async function seedStaticProjectsToDb(options?: {
   categories?: ProjectCategory[];
+  mode?: "insert" | "upsert";
 }): Promise<SeedStaticProjectsResult> {
   const categories: ProjectCategory[] = options?.categories ?? ["development", "motion"];
+  const mode = options?.mode ?? "insert";
   const seedList = buildSeedList(categories);
 
   const supabase = createSupabaseServiceClient();
@@ -48,40 +52,81 @@ export async function seedStaticProjectsToDb(options?: {
   }
 
   const createdSlugs: string[] = [];
+  const updatedSlugs: string[] = [];
   let created = 0;
+  let updated = 0;
   let skipped = 0;
 
   for (const project of seedList) {
     const slug = String(project.slug ?? "").trim();
     if (!slug) continue;
 
-    if (existingBySlug.has(slug)) {
+    const existingId = existingBySlug.get(slug) ?? null;
+    const shouldUpsert = mode === "upsert" && Boolean(existingId);
+
+    const rowPayload = {
+      title: String(project.title ?? "").trim(),
+      slug,
+      description: String(project.description ?? "").trim(),
+      category: project.category,
+      status: project.status,
+      is_featured: Boolean(project.isFeatured),
+      featured_rank: project.featuredRank ?? null,
+      tools: normalizeList(project.tools),
+      tags: normalizeList(project.tags),
+      cover_image_url: project.coverImageUrl ? String(project.coverImageUrl) : null,
+      cover_image_public_id: project.coverImagePublicId ? String(project.coverImagePublicId) : null,
+      video_url: project.videoUrl ? String(project.videoUrl) : null,
+    };
+
+    let projectId: string;
+
+    if (existingId && !shouldUpsert) {
       skipped += 1;
       continue;
     }
 
-    const { data: inserted, error: insertError } = await supabase
-      .from("projects")
-      .insert({
-        title: String(project.title ?? "").trim(),
-        slug,
-        description: String(project.description ?? "").trim(),
-        category: project.category,
-        status: project.status,
-        is_featured: Boolean(project.isFeatured),
-        featured_rank: project.featuredRank ?? null,
-        tools: normalizeList(project.tools),
-        tags: normalizeList(project.tags),
-        cover_image_url: project.coverImageUrl ? String(project.coverImageUrl) : null,
-        cover_image_public_id: project.coverImagePublicId ? String(project.coverImagePublicId) : null,
-        video_url: project.videoUrl ? String(project.videoUrl) : null,
-      })
-      .select("id")
-      .single();
+    if (shouldUpsert) {
+      const { data: updatedRow, error } = await supabase
+        .from("projects")
+        .update(rowPayload)
+        .eq("id", existingId)
+        .select("id")
+        .single();
 
-    if (insertError) throw insertError;
+      if (error) throw error;
 
-    const projectId = String(inserted.id);
+      projectId = String(updatedRow.id);
+      updated += 1;
+      updatedSlugs.push(slug);
+    } else {
+      const { data: inserted, error: insertError } = await supabase
+        .from("projects")
+        .insert(rowPayload)
+        .select("id")
+        .single();
+
+      if (insertError) throw insertError;
+
+      projectId = String(inserted.id);
+      created += 1;
+      createdSlugs.push(slug);
+    }
+
+    // In upsert mode, keep related tables in sync as well.
+    if (mode === "upsert") {
+      const { error: mediaDeleteError } = await supabase
+        .from("project_media")
+        .delete()
+        .eq("project_id", projectId);
+      if (mediaDeleteError) throw mediaDeleteError;
+
+      const { error: linksDeleteError } = await supabase
+        .from("project_links")
+        .delete()
+        .eq("project_id", projectId);
+      if (linksDeleteError) throw linksDeleteError;
+    }
 
     const images = Array.isArray(project.images) ? project.images : [];
     if (images.length > 0) {
@@ -117,8 +162,6 @@ export async function seedStaticProjectsToDb(options?: {
       }
     }
 
-    created += 1;
-    createdSlugs.push(slug);
     existingBySlug.set(slug, projectId);
   }
 
@@ -127,7 +170,9 @@ export async function seedStaticProjectsToDb(options?: {
     categories,
     considered: seedList.length,
     created,
+    updated,
     skipped,
     createdSlugs,
+    updatedSlugs,
   };
 }
