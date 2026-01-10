@@ -182,6 +182,8 @@ const ProjectsSection = ({ mode = 'featured', projects }: ProjectsSectionProps) 
     return { total, totalPages, page: safePage, items };
   }, [activeTab, filteredAllProjects, filteredProjectsByCategory, page]);
 
+  const allTabProjects = mode === 'all' ? (paginationMeta.items as Project[]) : filteredAllProjects;
+
   useEffect(() => {
     if (page !== paginationMeta.page) setPage(paginationMeta.page);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -322,12 +324,12 @@ const ProjectsSection = ({ mode = 'featured', projects }: ProjectsSectionProps) 
 
             <TabsContent value="all" className="mt-0">
               <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-                {paginationMeta.items.length === 0 ? (
+                {allTabProjects.length === 0 ? (
                   <div className="rounded-xl border border-dashed border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-8 text-center text-zinc-600 dark:text-zinc-300">
                     No projects yet.
                   </div>
                 ) : (
-                  paginationMeta.items.map((project, index) =>
+                  allTabProjects.map((project, index) =>
                     project.category === 'motion' ? (
                       <MotionProjectCard key={project.id} project={project} index={index} />
                     ) : (

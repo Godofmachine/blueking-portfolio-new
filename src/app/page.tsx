@@ -35,7 +35,6 @@ export default async function Home() {
       mode="featured"
       projects={await fetchProjectsByCategory({
         featuredOnly: true,
-        featuredLimitPerCategory: 4,
       })}
     />
     <ContactSection settings={landingSettings} />

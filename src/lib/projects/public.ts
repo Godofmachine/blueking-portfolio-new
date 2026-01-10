@@ -25,22 +25,21 @@ export async function fetchProjectsByCategory(options: {
     Boolean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
   if (!hasEnv) {
-    return featuredOnly
-      ? {
-          development: staticProjectsByCategory.development.slice(
-            0,
-            featuredLimitPerCategory ?? 4
-          ),
-          design: staticProjectsByCategory.design.slice(
-            0,
-            featuredLimitPerCategory ?? 4
-          ),
-          motion: staticProjectsByCategory.motion.slice(
-            0,
-            featuredLimitPerCategory ?? 4
-          ),
-        }
-      : staticProjectsByCategory;
+    if (!featuredOnly) return staticProjectsByCategory;
+
+    if (typeof featuredLimitPerCategory === "number") {
+      return {
+        development: staticProjectsByCategory.development.slice(0, featuredLimitPerCategory),
+        design: staticProjectsByCategory.design.slice(0, featuredLimitPerCategory),
+        motion: staticProjectsByCategory.motion.slice(0, featuredLimitPerCategory),
+      };
+    }
+
+    return {
+      development: staticProjectsByCategory.development,
+      design: staticProjectsByCategory.design,
+      motion: staticProjectsByCategory.motion,
+    };
   }
 
   try {

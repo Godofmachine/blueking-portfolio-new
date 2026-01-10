@@ -22,7 +22,7 @@ export async function GET(request: Request) {
 
   try {
     // Warm the server + hit Supabase once so the first real visitor is less likely to see a cold path.
-    await fetchProjectsByCategory({ featuredOnly: true, featuredLimitPerCategory: 4 });
+    await fetchProjectsByCategory({ featuredOnly: true });
     return NextResponse.json({ ok: true });
   } catch (err) {
     return NextResponse.json(
