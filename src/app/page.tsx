@@ -8,10 +8,13 @@ import ProjectsSection from './components/ProjectsSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
+import { unstable_noStore as noStore } from "next/cache";
+
 import { fetchProjectsByCategory } from '@/lib/projects/public';
 import { getLandingSettings } from '@/lib/site/settings';
 
 export default async function Home() {
+  noStore();
   const landingSettings = await getLandingSettings();
 
   return (

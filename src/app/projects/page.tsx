@@ -2,12 +2,14 @@ import Header from "../components/Header";
 import ProjectsSection from "../components/ProjectsSection";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import { unstable_noStore as noStore } from "next/cache";
 
 import { Button } from "@ui/button";
 
 import { fetchProjectsByCategory } from "@lib/projects/public";
 
 export default async function ProjectsPage() {
+  noStore();
   const projectsByCategory = await fetchProjectsByCategory({
     featuredOnly: false,
   });
