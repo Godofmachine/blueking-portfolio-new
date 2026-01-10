@@ -781,7 +781,6 @@ export default function AdminProjectsPage() {
                       <TableHead className="w-10">
                         <Checkbox
                           checked={allSelected}
-                          // @ts-expect-error Radix checkbox uses 'indeterminate' in some setups
                           indeterminate={someSelected}
                           onCheckedChange={(v) => toggleSelectAll(Boolean(v))}
                           aria-label="Select all"
