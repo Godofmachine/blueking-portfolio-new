@@ -1601,7 +1601,7 @@ export default function ProjectForm({ mode, projectId, initial }: ProjectFormPro
         }}
       >
         <AlertDialogContent
-          onEscapeKeyDown={(e) => {
+          onEscapeKeyDown={(e: KeyboardEvent) => {
             if (isDeleting) e.preventDefault();
           }}
         >
