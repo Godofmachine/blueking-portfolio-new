@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 import HeroIframe from './components/HeroIframe'
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
@@ -11,7 +13,27 @@ import Footer from './components/Footer';
 import { fetchProjectsByCategory } from '@/lib/projects/public';
 import { getLandingSettings } from '@/lib/site/settings';
 
-export default async function Home() {
+type PageProps = {
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
+export default async function Home({ searchParams }: PageProps) {
+  const hasAuthParams =
+    typeof searchParams?.code === "string" ||
+    typeof searchParams?.error === "string";
+
+  // If an auth provider lands on /?code=..., forward to our Supabase callback route.
+  if (hasAuthParams) {
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(searchParams ?? {})) {
+      if (typeof value === "string") params.set(key, value);
+      else if (Array.isArray(value) && typeof value[0] === "string") {
+        params.set(key, value[0]);
+      }
+    }
+    redirect(`/auth/callback?${params.toString()}`);
+  }
+
   const landingSettings = await getLandingSettings();
 
   return (
