@@ -14,18 +14,20 @@ import { fetchProjectsByCategory } from '@/lib/projects/public';
 import { getLandingSettings } from '@/lib/site/settings';
 
 type PageProps = {
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export default async function Home({ searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams;
+
   const hasAuthParams =
-    typeof searchParams?.code === "string" ||
-    typeof searchParams?.error === "string";
+    typeof resolvedSearchParams?.code === "string" ||
+    typeof resolvedSearchParams?.error === "string";
 
   // If an auth provider lands on /?code=..., forward to our Supabase callback route.
   if (hasAuthParams) {
     const params = new URLSearchParams();
-    for (const [key, value] of Object.entries(searchParams ?? {})) {
+    for (const [key, value] of Object.entries(resolvedSearchParams ?? {})) {
       if (typeof value === "string") params.set(key, value);
       else if (Array.isArray(value) && typeof value[0] === "string") {
         params.set(key, value[0]);
