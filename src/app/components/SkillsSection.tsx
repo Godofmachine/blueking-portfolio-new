@@ -66,13 +66,13 @@ const SkillsSection = () => {
   });
 
   return (
-    <section id="skills-section" className="py-20 px-4 md:px-8 lg:px-16 bg-gray-50 relative">
+    <section id="skills-section" className="py-20 px-4 md:px-8 lg:px-16 bg-gray-50 dark:bg-zinc-950 relative">
             {/* Background decorative elements */}
             {/* <div className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div> */}
       {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent dark:from-zinc-950"></div>
+      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent dark:from-zinc-950"></div>
       
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 text-center">
@@ -80,9 +80,13 @@ const SkillsSection = () => {
         </h2>
         
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
-            <TabsTrigger value="design">Design</TabsTrigger>
-            <TabsTrigger value="development">Development</TabsTrigger>
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12 bg-white border border-gray-200 dark:bg-zinc-900/60 dark:border-zinc-800">
+            <TabsTrigger value="design" className="data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950">
+              Design
+            </TabsTrigger>
+            <TabsTrigger value="development" className="data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950">
+              Development
+            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="design" className="animate-fade-in">
@@ -93,9 +97,9 @@ const SkillsSection = () => {
                   <div key={index} className="mb-6">
                     <div className="flex justify-between mb-2">
                       <span className="font-medium">{skill.name}</span>
-                      <span className="text-gray-500">{skill.level}%</span>
+                      <span className="text-gray-500 dark:text-zinc-400">{skill.level}%</span>
                     </div>
-                    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-2 w-full bg-gray-200 dark:bg-zinc-800 rounded-full overflow-hidden">
                       <motion.div
                         className={`h-full ${skill.color}`}
                         initial={{ width: 0 }}
@@ -124,9 +128,9 @@ const SkillsSection = () => {
                   ))}
                 </div>
                 
-                <div className="mt-8 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+                <div className="mt-8 p-4 bg-white dark:bg-zinc-900/60 rounded-lg border border-gray-200 dark:border-zinc-800 shadow-sm">
                   <h4 className="text-lg font-semibold mb-3">Design Process</h4>
-                  <ol className="list-decimal ml-5 space-y-2 text-gray-700">
+                  <ol className="list-decimal ml-5 space-y-2 text-gray-700 dark:text-zinc-300">
                     <li>Research & Discovery</li>
                     <li>Concept Development</li>
                     <li>Visual Exploration</li>
@@ -146,9 +150,9 @@ const SkillsSection = () => {
                   <div key={index} className="mb-6">
                     <div className="flex justify-between mb-2">
                       <span className="font-medium">{skill.name}</span>
-                      <span className="text-gray-500">{skill.level}%</span>
+                      <span className="text-gray-500 dark:text-zinc-400">{skill.level}%</span>
                     </div>
-                    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-2 w-full bg-gray-200 dark:bg-zinc-800 rounded-full overflow-hidden">
                       <motion.div
                         className={`h-full ${skill.color}`}
                         initial={{ width: 0 }}
@@ -177,9 +181,9 @@ const SkillsSection = () => {
                   ))}
                 </div>
                 
-                <div className="mt-8 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+                <div className="mt-8 p-4 bg-white dark:bg-zinc-900/60 rounded-lg border border-gray-200 dark:border-zinc-800 shadow-sm">
                   <h4 className="text-lg font-semibold mb-3">Development Approach</h4>
-                  <ol className="list-decimal ml-5 space-y-2 text-gray-700">
+                  <ol className="list-decimal ml-5 space-y-2 text-gray-700 dark:text-zinc-300">
                     <li>Component Architecture Planning</li>
                     <li>Responsive Design Implementation</li>
                     <li>Performance Optimization</li>

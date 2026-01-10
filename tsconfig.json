@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,21 +23,48 @@
       }
     ],
     "baseUrl": ".", // 👈 THIS is required for aliases to work
-    
     "paths": {
-      "@/*": ["./src/*"],
-      "@app/*": ["src/app/*"],
-      "@components/*": ["src/app/components/*"],
-      "@ui/*": ["src/app/components/ui/*"],
-      "@hooks/*": ["src/app/hooks/*"],
-      "@lib/*": ["src/lib/*"],
-      "@assets/*": ["public/assets/*"],
-      "@styles/*": ["src/styles/*"],
-      "@config/*": ["src/config/*"],
-      "@utils/*": ["src/lib/utils/*"]
-      
+      "@/*": [
+        "./src/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@components/*": [
+        "src/app/components/*"
+      ],
+      "@ui/*": [
+        "src/app/components/ui/*"
+      ],
+      "@hooks/*": [
+        "src/app/hooks/*"
+      ],
+      "@lib/*": [
+        "src/lib/*"
+      ],
+      "@assets/*": [
+        "public/assets/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ],
+      "@utils/*": [
+        "src/lib/utils/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".next-prod/types/**/*.ts",
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    ".next-dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

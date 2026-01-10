@@ -2,9 +2,20 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import type { LandingSettings } from "@/lib/site/types";
 
-const Header: React.FC = () => {
+type Props = {
+  settings?: LandingSettings;
+};
+
+const Header: React.FC<Props> = ({ settings }) => {
+  const pathname = usePathname();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [isThemeMounted, setIsThemeMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,13 +27,21 @@ const Header: React.FC = () => {
   const cartItemCount = 0; // Static cart count
 
   useEffect(() => {
+    setIsThemeMounted(true);
+  }, []);
+
+  useEffect(() => {
     if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
+      const h = headerRef.current.offsetHeight;
+      setHeaderHeight(h);
+      document.documentElement.style.setProperty('--app-header-height', `${h}px`);
     }
     // Update header height on window resize
     const handleResize = () => {
       if (headerRef.current) {
-        setHeaderHeight(headerRef.current.offsetHeight);
+        const h = headerRef.current.offsetHeight;
+        setHeaderHeight(h);
+        document.documentElement.style.setProperty('--app-header-height', `${h}px`);
       }
     };
     window.addEventListener('resize', handleResize);
@@ -74,7 +93,7 @@ const Header: React.FC = () => {
       {/* Download Resume Button */}
       <div className="flex items-center group max-xl:ml-auto mr-2 md:mr-8">
         <a 
-          href="/My Resume.pdf" 
+          href={settings?.header?.resumeUrl ?? "/My Resume.pdf"}
           download
           target='blank'
           className="flex items-center relative overflow-hidden bg-white/10 hover:bg-white/20 duration-300 ease-out translate-all rounded-full pl-2 sm:pl-4 lg:pl-6 pr-2 py-1.5 sm:py-2"
@@ -87,6 +106,23 @@ const Header: React.FC = () => {
           </div>
         </a>
       </div>
+
+      {/* Theme switcher */}
+      <button
+        type="button"
+        aria-label="Toggle theme"
+        onClick={() => {
+          const current = resolvedTheme ?? 'dark';
+          setTheme(current === 'dark' ? 'light' : 'dark');
+        }}
+        className="w-10 h-10 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 duration-300 ease-out flex items-center justify-center"
+      >
+        {isThemeMounted && (resolvedTheme ?? 'dark') === 'dark' ? (
+          <Sun className="h-5 w-5 text-white" />
+        ) : (
+          <Moon className="h-5 w-5 text-white" />
+        )}
+      </button>
     </div>
   );
 
@@ -107,15 +143,15 @@ const Header: React.FC = () => {
       {/* Logo */}
       <div className="items-center flex justify-start z-[300]">
         <div className="lg:py-2 w-full flex">
-        <Link href="/" className=""> <img src="/logo-bw.png" alt="logo" className='w-32' />
+        <Link href="/" className=""> <img src={settings?.header?.logoUrl ?? "/logo-bw.png"} alt={settings?.hero?.name ?? "logo"} className='w-32' />
         </Link>
           {/* Desktop Navigation */}
           <div className={`xl:flex ${mobileMenuOpen ? 'hidden' : 'hidden'} flex-col xl:flex-row items-center text-nowrap space-y-4 lg:space-y-0 space-x-2 xl:space-x-8 w-full ms-5 2xl:ms-24 lg:w-auto mt-4 lg:mt-0`}>
-            <a href="#home" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Home</a>
-            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">About</a>
-            <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Projects</a>
-            <a href="#skills-section" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Skills</a>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Contact</a>
+            <Link href={`${pathname === '/' ? '' : '/'}#home`} onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Home</Link>
+            <Link href={`${pathname === '/' ? '' : '/'}#about`} onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">About</Link>
+            <Link href={`${pathname === '/' ? '' : '/'}#projects`} onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Projects</Link>
+            <Link href={`${pathname === '/' ? '' : '/'}#skills-section`} onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Skills</Link>
+            <Link href={`${pathname === '/' ? '' : '/'}#contact`} onClick={() => setMobileMenuOpen(false)} className="text-white text-md xl:text-lg font-medium hover:text-gray-300">Contact</Link>
           </div>
         </div>
       </div>
@@ -146,7 +182,7 @@ const Header: React.FC = () => {
               <div className="flex justify-between items-center p-4 border-b border-gray-800">
                 <div className="py-2 flex">
                  
-                  <Link href="/" className=""> <img src="/logo-bw.png" alt="logo" className='w-28' />
+                  <Link href="/" className=""> <img src={settings?.header?.logoUrl ?? "/logo-bw.png"} alt={settings?.hero?.name ?? "logo"} className='w-28' />
                   </Link>
                 </div>
                 <button 
@@ -164,31 +200,31 @@ const Header: React.FC = () => {
                 <nav className="py-2">
                   <div className="border-b border-gray-800" key="home">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <a href="#home" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Home</a>
+                      <Link href={`${pathname === '/' ? '' : '/'}#home`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Home</Link>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="about">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">About</a>
+                      <Link href={`${pathname === '/' ? '' : '/'}#about`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">About</Link>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="projects">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Projects</a>
+                      <Link href={`${pathname === '/' ? '' : '/'}#projects`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Projects</Link>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="skills">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <a href="#skills-section" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Skills</a>
+                      <Link href={`${pathname === '/' ? '' : '/'}#skills-section`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Skills</Link>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="contact">
                     <div className="px-6 py-4">
-                      <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Contact</a>
+                      <Link href={`${pathname === '/' ? '' : '/'}#contact`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Contact</Link>
                     </div>
                   </div>
                 </nav>

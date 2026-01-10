@@ -14,11 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* <link rel="stylesheet" href="/css/face-style.css" /> */}
       </head>
-      <body className="w-screen overflow-x-hidden">
+      <body className="w-screen overflow-x-hidden bg-background text-foreground">
         <Providers>
           {children}
           <BackToTop />

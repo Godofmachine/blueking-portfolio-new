@@ -5,10 +5,26 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Github } from 'lucide-react';
+import type { LandingSettings } from "@/lib/site/types";
 
-const ContactSection = () => {
+type Props = {
+  settings?: LandingSettings;
+};
+
+const ContactSection = ({ settings }: Props) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const contact = settings?.contact;
+
+  const visibleSocials = (contact?.socials && contact.socials.length ? contact.socials : [
+    { label: "X", url: contact?.xUrl ?? "https://x.com/Blueking_I", visible: true },
+    { label: "GitHub", url: contact?.githubUrl ?? "https://github.com/Godofmachine", visible: true },
+  ])
+    .filter((s) => s && s.visible && typeof s.url === "string" && s.url.trim());
+
+  const primarySocials = visibleSocials.slice(0, 2);
+  const extraSocials = visibleSocials.slice(2);
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,7 +40,7 @@ const ContactSection = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          access_key: 'ad1363bd-b83b-4595-b733-c0ceb046086b', // Replace with your access key
+          access_key: contact?.web3formsAccessKey ?? 'ad1363bd-b83b-4595-b733-c0ceb046086b',
           name: formData.get('name'),
           email: formData.get('email'),
           subject: formData.get('subject'),
@@ -57,7 +73,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 md:px-8 lg:px-16 bg-gray-50 relative">
+    <section id="contact" className="py-20 px-4 md:px-8 lg:px-16 bg-gray-50 dark:bg-zinc-950 relative">
       {/* Background decorative elements */}
       {/* <div className="absolute top-20 right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div> */}
@@ -81,7 +97,12 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-medium">Email</h4>
-                  <a href="mailto:samueladeniran016@gmail.com" className="text-gray-600 hover:text-designer-purple transition-colors">samueladeniran016@gmail.com</a>
+                  <a
+                    href={`mailto:${contact?.email ?? "samueladeniran016@gmail.com"}`}
+                    className="text-gray-600 dark:text-zinc-300 hover:text-designer-purple transition-colors"
+                  >
+                    {contact?.email ?? "samueladeniran016@gmail.com"}
+                  </a>
                 </div>
               </div>
 
@@ -93,7 +114,12 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-medium">Phone</h4>
-                  <a href="tel:+2348166776666" className="text-gray-600 hover:text-designer-purple transition-colors">+234 901 745 9581</a>
+                  <a
+                    href={`tel:${(contact?.phone ?? "+234 901 745 9581").replace(/\s+/g, "")}`}
+                    className="text-gray-600 dark:text-zinc-300 hover:text-designer-purple transition-colors"
+                  >
+                    {contact?.phone ?? "+234 901 745 9581"}
+                  </a>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
@@ -105,7 +131,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-medium">Location</h4>
-                  <p className="text-gray-600">Ibadan, Nigeria</p>
+                  <p className="text-gray-600 dark:text-zinc-300">{contact?.location ?? "Ibadan, Nigeria"}</p>
                 </div>
               </div>
               
@@ -117,7 +143,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-medium">Working Hours</h4>
-                  <p className="text-gray-600">Mon - Fri: 9:00 AM - 6:00 PM</p>
+                  <p className="text-gray-600 dark:text-zinc-300">{contact?.workingHours ?? "Mon - Fri: 9:00 AM - 6:00 PM"}</p>
                 </div>
               </div>
             </div>
@@ -132,11 +158,44 @@ const ContactSection = () => {
                     <circle cx="4" cy="4" r="2"></circle>
                   </svg>
                 </a> */}
-                <a href="https://x.com/Blueking_I" className="bg-white p-3 rounded-full shadow-sm hover:shadow-md transition-shadow">
-                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 50 50" className="text-gray-700">
-              <path fill="none" d="M 5.9199219 6 L 20.582031 27.375 L 6.2304688 44 L 9.4101562 44 L 21.986328 29.421875 L 31.986328 44 L 44 44 L 28.681641 21.669922 L 42.199219 6 L 39.029297 6 L 27.275391 19.617188 L 17.933594 6 L 5.9199219 6 z M 9.7167969 8 L 16.880859 8 L 40.203125 42 L 33.039062 42 L 9.7167969 8 z"></path>
-              </svg>   
-                </a>
+                {primarySocials.map((s) => {
+                  const label = (s.label || "").toLowerCase();
+                  const isX = label.includes("x") || label.includes("twitter");
+                  const isGithub = label.includes("github");
+                  if (isX) {
+                    return (
+                      <a
+                        key={s.url}
+                        href={s.url}
+                        className="bg-white dark:bg-zinc-900/60 p-3 rounded-full shadow-sm hover:shadow-md transition-shadow border border-transparent dark:border-zinc-800"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 50 50" className="text-gray-700">
+                          <path fill="none" d="M 5.9199219 6 L 20.582031 27.375 L 6.2304688 44 L 9.4101562 44 L 21.986328 29.421875 L 31.986328 44 L 44 44 L 28.681641 21.669922 L 42.199219 6 L 39.029297 6 L 27.275391 19.617188 L 17.933594 6 L 5.9199219 6 z M 9.7167969 8 L 16.880859 8 L 40.203125 42 L 33.039062 42 L 9.7167969 8 z"></path>
+                        </svg>
+                      </a>
+                    );
+                  }
+                  if (isGithub) {
+                    return (
+                      <a
+                        key={s.url}
+                        href={s.url}
+                        className="bg-white dark:bg-zinc-900/60 p-3 rounded-full shadow-sm hover:shadow-md transition-shadow border border-transparent dark:border-zinc-800"
+                      >
+                        <Github size={24} className='text-gray-700 dark:text-zinc-200'/>
+                      </a>
+                    );
+                  }
+                  return (
+                    <a
+                      key={s.url}
+                      href={s.url}
+                      className="bg-white dark:bg-zinc-900/60 px-3 py-2 rounded-full shadow-sm hover:shadow-md transition-shadow border border-transparent dark:border-zinc-800 text-sm text-gray-700 dark:text-zinc-200"
+                    >
+                      {s.label || "Link"}
+                    </a>
+                  );
+                })}
                 {/* <a href="#" className="bg-white p-3 rounded-full shadow-sm hover:shadow-md transition-shadow">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -144,15 +203,26 @@ const ContactSection = () => {
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                   </svg>
                 </a> */}
-                <a href="https://github.com/Godofmachine" className="bg-white p-3 rounded-full shadow-sm hover:shadow-md transition-shadow">
-                  <Github size={24} className='text-gray-700'/>
-                </a>
               </div>
+
+              {extraSocials.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {extraSocials.map((s) => (
+                    <a
+                      key={s.url}
+                      href={s.url}
+                      className="text-sm text-gray-600 dark:text-zinc-300 hover:text-designer-purple transition-colors"
+                    >
+                      {s.label || s.url}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           
           {/* Contact Form */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <div className="bg-white dark:bg-zinc-900/60 p-6 rounded-lg shadow-sm border border-transparent dark:border-zinc-800">
             <h3 className="text-xl font-semibold mb-6 font-display">Send Me a Message</h3>
             
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -162,26 +232,26 @@ const ContactSection = () => {
                   <Input id="heading" name="name" value={"Blueking's Portfolio Contact Form"} disabled />
                 </div>
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <Input id="name" name="name" placeholder="Your name" required />
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-zinc-200 mb-1">Name</label>
+                  <Input id="name" name="name" placeholder="Your name" required className="border-gray-200 dark:border-zinc-800 dark:bg-zinc-950/60" />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <Input id="email" name="email" type="email" placeholder="Your email" required />
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-zinc-200 mb-1">Email</label>
+                  <Input id="email" name="email" type="email" placeholder="Your email" required className="border-gray-200 dark:border-zinc-800 dark:bg-zinc-950/60" />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                <Input id="subject" name="subject" placeholder="Subject" required />
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-zinc-200 mb-1">Subject</label>
+                <Input id="subject" name="subject" placeholder="Subject" required className="border-gray-200 dark:border-zinc-800 dark:bg-zinc-950/60" />
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <Textarea id="message" name="message" placeholder="Your message" className="resize-none" rows={5} required />
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-zinc-200 mb-1">Message</label>
+                <Textarea id="message" name="message" placeholder="Your message" className="resize-none border-gray-200 dark:border-zinc-800 dark:bg-zinc-950/60" rows={5} required />
               </div>
               
-              <Button type="submit" className="w-full bg-zinc-900 hover:bg-gray-900 text-white" disabled={isSubmitting}>
+              <Button type="submit" className="w-full bg-zinc-900 hover:bg-gray-900 text-white dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100" disabled={isSubmitting}>
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>

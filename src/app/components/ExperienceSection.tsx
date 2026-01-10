@@ -60,76 +60,76 @@ const ExperienceSection = () => {
         </div> */}
         
         <div className="-mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+          <div className="bg-gray-50 dark:bg-zinc-900/60 p-6 rounded-lg shadow-sm border border-transparent dark:border-zinc-800">
             <h3 className="text-lg font-semibold mb-4 font-display">Education</h3>
             <div className="mb-4">
               <div className="font-medium">Senior Secondary School Certificate (SSCE)</div>
-              <div className="text-gray-600">Oritamefa Baptist Model School</div>
-              <div className="text-sm text-gray-500">2014 - 2020</div>
+              <div className="text-gray-600 dark:text-zinc-300">Oritamefa Baptist Model School</div>
+              <div className="text-sm text-gray-500 dark:text-zinc-400">2014 - 2020</div>
             </div>
             <div>
               <div className="font-medium">Bachelor of Laws (LL.B)</div>
-              <div className="text-gray-600">University of Ibadan</div>
-              <div className="text-sm text-gray-500">2021-2026</div>
+              <div className="text-gray-600 dark:text-zinc-300">University of Ibadan</div>
+              <div className="text-sm text-gray-500 dark:text-zinc-400">2021-2026</div>
             </div>
           </div>
           
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+          <div className="bg-gray-50 dark:bg-zinc-900/60 p-6 rounded-lg shadow-sm border border-transparent dark:border-zinc-800">
             <h3 className="text-lg font-semibold mb-4 font-display">Languages</h3>
             <div className="space-y-3">
               <div>
                 <div className="flex justify-between mb-1">
                   <div>English</div>
-                  <div className="text-gray-500">Native</div>
+                  <div className="text-gray-500 dark:text-zinc-400">Native</div>
                 </div>
-                <div className="w-full bg-gray-200 h-1.5 rounded-full">
+                <div className="w-full bg-gray-200 dark:bg-zinc-800 h-1.5 rounded-full">
                   <div className="bg-zinc-600 h-full rounded-full w-full"></div>
                 </div>
               </div>
               <div>
                 <div className="flex justify-between mb-1">
                   <div>Yoruba</div>
-                  <div className="text-gray-500">Native</div>
+                  <div className="text-gray-500 dark:text-zinc-400">Native</div>
                 </div>
-                <div className="w-full bg-gray-200 h-1.5 rounded-full">
+                <div className="w-full bg-gray-200 dark:bg-zinc-800 h-1.5 rounded-full">
                   <div className="bg-zinc-500 h-full rounded-full w-full"></div>
                 </div>
               </div>
               <div>
                 <div className="flex justify-between mb-1">
                   <div>French</div>
-                  <div className="text-gray-500">Basic</div>
+                  <div className="text-gray-500 dark:text-zinc-400">Basic</div>
                 </div>
-                <div className="w-full bg-gray-200 h-1.5 rounded-full">
+                <div className="w-full bg-gray-200 dark:bg-zinc-800 h-1.5 rounded-full">
                   <div className="bg-gray-500 h-full rounded-full w-2/5"></div>
                 </div>
               </div>
               <div>
                 <div className="flex justify-between mb-1">
                   <div>Latin</div>
-                  <div className="text-gray-500">Beginner</div>
+                  <div className="text-gray-500 dark:text-zinc-400">Beginner</div>
                 </div>
-                <div className="w-full bg-gray-200 h-1.5 rounded-full">
+                <div className="w-full bg-gray-200 dark:bg-zinc-800 h-1.5 rounded-full">
                   <div className="bg-gray-500 h-full rounded-full w-1/5"></div>
                 </div>
               </div>
               <div>
                 <div className="flex justify-between mb-1">
                   <div>American Sign Language</div>
-                  <div className="text-gray-500">Intermediate</div>
+                  <div className="text-gray-500 dark:text-zinc-400">Intermediate</div>
                 </div>
-                <div className="w-full bg-gray-200 h-1.5 rounded-full">
+                <div className="w-full bg-gray-200 dark:bg-zinc-800 h-1.5 rounded-full">
                   <div className="bg-gray-500 h-full rounded-full w-3/5"></div>
                 </div>
               </div>
             </div>
           </div>
           
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+          <div className="bg-gray-50 dark:bg-zinc-900/60 p-6 rounded-lg shadow-sm border border-transparent dark:border-zinc-800">
             <h3 className="text-lg font-semibold mb-4 font-display">Interests</h3>
             <div className="flex flex-wrap gap-2">
               {["Theatre", "Football", "Law", "Tech", "Arts", "Religion", "Poetry", "Swimming"].map((interest, index) => (
-                <span key={index} className="bg-white px-3 py-1 rounded-full text-sm border border-gray-200">
+                <span key={index} className="bg-white dark:bg-zinc-950 px-3 py-1 rounded-full text-sm border border-gray-200 dark:border-zinc-800">
                   {interest}
                 </span>
               ))}
