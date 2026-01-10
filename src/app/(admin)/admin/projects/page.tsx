@@ -780,8 +780,7 @@ export default function AdminProjectsPage() {
                     <TableRow className="bg-zinc-50/60 dark:bg-zinc-950/30 hover:bg-zinc-50/60 dark:hover:bg-zinc-950/30">
                       <TableHead className="w-10">
                         <Checkbox
-                          checked={allSelected}
-                          indeterminate={someSelected}
+                          checked={allSelected ? true : someSelected ? "indeterminate" : false}
                           onCheckedChange={(v) => toggleSelectAll(Boolean(v))}
                           aria-label="Select all"
                         />
