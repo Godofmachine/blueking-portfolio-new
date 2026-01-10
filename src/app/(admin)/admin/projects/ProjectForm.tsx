@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import { useRouter } from "next/navigation";
 
 import type { Project, ProjectCategory, ProjectStatus } from "@lib/projects/types";
@@ -1636,7 +1637,7 @@ export default function ProjectForm({ mode, projectId, initial }: ProjectFormPro
           <AlertDialogFooter>
             <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={(e) => {
+              onClick={(e: ReactMouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
                 void deleteProject(deleteChoice === "project_media");
               }}
