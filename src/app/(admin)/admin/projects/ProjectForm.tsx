@@ -1616,7 +1616,7 @@ export default function ProjectForm({ mode, projectId, initial }: ProjectFormPro
               <RadioGroup
                 className="mt-2"
                 value={deleteChoice}
-                onValueChange={(v) => setDeleteChoice(v as any)}
+                onValueChange={(v: string) => setDeleteChoice(v as "project" | "project_media")}
               >
                 <div className="flex items-start gap-2">
                   <RadioGroupItem value="project" id="delete-project-only-form" />
