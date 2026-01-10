@@ -1595,7 +1595,7 @@ export default function ProjectForm({ mode, projectId, initial }: ProjectFormPro
 
       <AlertDialog
         open={confirmDeleteOpen}
-        onOpenChange={(open) => {
+        onOpenChange={(open: boolean) => {
           if (isDeleting) return;
           setConfirmDeleteOpen(open);
         }}
