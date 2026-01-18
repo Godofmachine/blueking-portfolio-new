@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import type { LandingSettings } from "@/lib/site/types";
+import { resolveResumeUrl, STATIC_RESUME_URL } from "@/lib/site/constants";
 
 type Props = {
   settings?: LandingSettings;
@@ -93,7 +94,7 @@ const Header: React.FC<Props> = ({ settings }) => {
       {/* Download Resume Button */}
       <div className="flex items-center group max-xl:ml-auto mr-2 md:mr-8">
         <a 
-          href={settings?.header?.resumeUrl ?? "/My Resume.pdf"}
+          href={resolveResumeUrl(settings?.header?.resumeUrl, STATIC_RESUME_URL)}
           download
           target='blank'
           className="flex items-center relative overflow-hidden bg-white/10 hover:bg-white/20 duration-300 ease-out translate-all rounded-full pl-2 sm:pl-4 lg:pl-6 pr-2 py-1.5 sm:py-2"

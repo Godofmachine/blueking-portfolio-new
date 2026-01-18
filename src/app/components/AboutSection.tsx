@@ -1,6 +1,7 @@
 import React from 'react';
 import { Separator } from "../components/ui/separator";
 import type { LandingSettings } from "@/lib/site/types";
+import { resolveResumeUrl, STATIC_RESUME_URL } from "@/lib/site/constants";
 
 type Props = {
   settings?: LandingSettings;
@@ -48,7 +49,7 @@ const AboutSection = ({ settings }: Props) => {
               </div>
               <div className="flex col-span-2 w-full">
               <a
-                href={about?.resumeUrl ?? "/My Resume.pdf"}
+                href={resolveResumeUrl(about?.resumeUrl, STATIC_RESUME_URL)}
                 download
                 className="flex items-center justify-center text-center text-xl w-full px-6 py-6 rounded-lg bg-gradient-to-r from-gray-800 to-zinc-500 text-white font-medium hover:from-gray-700 hover:to-zinc-400 transition-all duration-300 shadow-lg hover:shadow-xl"
               >

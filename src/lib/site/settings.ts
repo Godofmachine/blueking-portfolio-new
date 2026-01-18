@@ -1,13 +1,14 @@
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 
 import type { LandingSettings } from "./types";
+import { resolveResumeUrl, STATIC_RESUME_URL } from "./constants";
 
 const SETTINGS_KEY = "landing";
 
 export const DEFAULT_LANDING_SETTINGS: LandingSettings = {
   header: {
     logoUrl: "/logo-bw.png",
-    resumeUrl: "/My Resume.pdf",
+    resumeUrl: STATIC_RESUME_URL,
   },
   hero: {
     name: "Blueking",
@@ -35,7 +36,7 @@ export const DEFAULT_LANDING_SETTINGS: LandingSettings = {
     technicalTitle: "Technical Approach",
     technicalText:
       "Writing clean, maintainable code is as important as the visuals. I craft frontend experiences that are not just beautiful, but performant and accessible.",
-    resumeUrl: "/My Resume.pdf",
+    resumeUrl: STATIC_RESUME_URL,
     resumeLabel: "Download Resume",
   },
   contact: {
@@ -121,7 +122,7 @@ function mergeLandingSettings(partial: unknown): LandingSettings {
   return {
     header: {
       logoUrl: asString(header.logoUrl, d.header.logoUrl),
-      resumeUrl: asString(header.resumeUrl, d.header.resumeUrl),
+      resumeUrl: resolveResumeUrl(header.resumeUrl, d.header.resumeUrl),
     },
     hero: {
       name: asString(hero.name, d.hero.name),
@@ -142,7 +143,7 @@ function mergeLandingSettings(partial: unknown): LandingSettings {
       philosophyText: asString(about.philosophyText, d.about.philosophyText),
       technicalTitle: asString(about.technicalTitle, d.about.technicalTitle),
       technicalText: asString(about.technicalText, d.about.technicalText),
-      resumeUrl: asString(about.resumeUrl, d.about.resumeUrl),
+      resumeUrl: resolveResumeUrl(about.resumeUrl, d.about.resumeUrl),
       resumeLabel: asString(about.resumeLabel, d.about.resumeLabel),
     },
     contact: {
