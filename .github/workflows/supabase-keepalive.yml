@@ -24,6 +24,17 @@ jobs:
             exit 1
           fi
 
-          curl -fsS -X GET "$WARM_URL" \
+          response=$(curl -s -w "\n%{http_code}" -X GET "$WARM_URL" \
             -H "Authorization: Bearer $CRON_SECRET" \
-            -H "User-Agent: github-actions-supabase-keepalive"
+            -H "User-Agent: github-actions-supabase-keepalive")
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          if [ "$http_code" -ge 400 ]; then
+            echo "Request failed with status $http_code"
+            echo "Response body: $body"
+            exit 1
+          fi
+
+          echo "Success: $http_code"

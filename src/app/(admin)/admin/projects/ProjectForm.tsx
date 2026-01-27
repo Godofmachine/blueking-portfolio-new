@@ -334,6 +334,7 @@ export default function ProjectForm({ mode, projectId, initial }: ProjectFormPro
 
   const [isDragOverImages, setIsDragOverImages] = useState(false);
   const dragCounterRef = useRef(0);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const tools = useMemo(() => splitCommaList(toolsText), [toolsText]);
   const tags = useMemo(() => splitCommaList(tagsText), [tagsText]);
@@ -1418,6 +1419,7 @@ export default function ProjectForm({ mode, projectId, initial }: ProjectFormPro
           </div>
           <div>
             <input
+              ref={fileInputRef}
               type="file"
               multiple
               accept="image/*"
@@ -1436,14 +1438,15 @@ export default function ProjectForm({ mode, projectId, initial }: ProjectFormPro
             onDragOver={handleDragOver}
             onDrop={handleDrop}
             onPaste={handlePaste}
+            onClick={() => fileInputRef.current?.click()}
             className={
-              "rounded-xl border border-dashed bg-white dark:bg-zinc-900 p-6 text-sm text-zinc-600 dark:text-zinc-400 outline-none transition-colors " +
+              "cursor-pointer rounded-xl border border-dashed bg-white dark:bg-zinc-900 p-6 text-sm text-zinc-600 dark:text-zinc-400 outline-none transition-colors " +
               (isDragOverImages
                 ? "border-zinc-500 dark:border-zinc-400 bg-zinc-50 dark:bg-zinc-900/60"
-                : "border-zinc-300 dark:border-zinc-700")
+                : "border-zinc-300 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/50")
             }
           >
-            Drag &amp; drop images here, or click and paste (Ctrl+V).
+            Drag &amp; drop images here, or click to browse / paste (Ctrl+V).
           </div>
         )}
 
@@ -1492,14 +1495,15 @@ export default function ProjectForm({ mode, projectId, initial }: ProjectFormPro
               onDragOver={handleDragOver}
               onDrop={handleDrop}
               onPaste={handlePaste}
+              onClick={() => fileInputRef.current?.click()}
               className={
-                "rounded-xl border border-dashed bg-white dark:bg-zinc-900 p-4 text-sm text-zinc-600 dark:text-zinc-400 outline-none transition-colors " +
+                "cursor-pointer rounded-xl border border-dashed bg-white dark:bg-zinc-900 p-4 text-sm text-zinc-600 dark:text-zinc-400 outline-none transition-colors " +
                 (isDragOverImages
                   ? "border-zinc-500 dark:border-zinc-400 bg-zinc-50 dark:bg-zinc-900/60"
-                  : "border-zinc-300 dark:border-zinc-700")
+                  : "border-zinc-300 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/50")
               }
             >
-              Drag &amp; drop more images here, or click and paste (Ctrl+V).
+              Drag &amp; drop more images here, or click to browse / paste (Ctrl+V).
             </div>
 
             {images.map((img, idx) => (
