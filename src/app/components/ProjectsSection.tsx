@@ -674,22 +674,17 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           </h3>
 
           {tools.length > 0 && (
-            <div className="mt-1 sm:mt-2">
+            <div className="mt-1 sm:mt-2 h-5 sm:h-6 overflow-hidden">
               <div className="flex items-center gap-1 flex-wrap">
-                {tools.slice(0, 2).map((tool, i) => (
+                {tools.map((tool, i) => (
                   <Badge
                     key={`tool-${tool}-${i}`}
                     variant="outline"
-                    className="text-[9px] sm:text-xs px-1.5 py-0.2 sm:px-2 sm:py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium leading-normal"
+                    className="text-[9px] sm:text-xs px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium leading-none whitespace-nowrap truncate max-w-[120px] sm:max-w-none shrink-0"
                   >
                     {tool}
                   </Badge>
                 ))}
-                {tools.length > 2 && (
-                  <span className="text-[9px] sm:text-xs font-medium px-1 text-zinc-400 dark:text-zinc-500">
-                    +{tools.length - 2}
-                  </span>
-                )}
               </div>
             </div>
           )}
@@ -1150,22 +1145,17 @@ const MotionProjectCard = ({ project, index }: { project: Project; index: number
           </h3>
 
           {tools.length > 0 && (
-            <div className="mt-1 sm:mt-2">
+            <div className="mt-1 sm:mt-2 h-5 sm:h-6 overflow-hidden">
               <div className="flex items-center gap-1 flex-wrap">
-                {tools.slice(0, 2).map((tool, i) => (
+                {tools.map((tool, i) => (
                   <Badge
                     key={`tool-${tool}-${i}`}
                     variant="outline"
-                    className="text-[9px] sm:text-xs px-1.5 py-0.2 sm:px-2 sm:py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium leading-normal"
+                    className="text-[9px] sm:text-xs px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium leading-none whitespace-nowrap truncate max-w-[120px] sm:max-w-none shrink-0"
                   >
                     {tool}
                   </Badge>
                 ))}
-                {tools.length > 2 && (
-                  <span className="text-[9px] sm:text-xs font-medium px-1 text-zinc-400 dark:text-zinc-500">
-                    +{tools.length - 2}
-                  </span>
-                )}
               </div>
             </div>
           )}
