@@ -325,7 +325,7 @@ const ProjectsSection = ({ mode = 'featured', projects }: ProjectsSectionProps) 
             </div>
 
             <TabsContent value="all" className="mt-0">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
                 {allTabProjects.length === 0 ? (
                   <div className="rounded-xl border border-dashed border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-8 text-center text-zinc-600 dark:text-zinc-300">
                     No projects yet.
@@ -609,7 +609,7 @@ function ProjectsGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
       {projects.map((project, index) =>
         card === 'motion' ? (
           <MotionProjectCard key={project.id} project={project} index={index} />
@@ -631,21 +631,21 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 bg-white dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800 flex flex-col justify-between"
+      className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800 flex flex-col justify-between"
     >
       {cover ? (
         <GalleryDialog project={project}>
-          <div className="aspect-[16/10] sm:aspect-square overflow-hidden cursor-pointer relative bg-zinc-100 dark:bg-zinc-800">
+          <div className="aspect-square overflow-hidden cursor-pointer relative bg-zinc-100 dark:bg-zinc-800">
             <img
               src={cover}
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
             />
 
-            <div className="absolute right-3 top-3">
+            <div className="absolute right-2 top-2 sm:right-3 sm:top-3">
               <Badge
                 variant="outline"
-                className="rounded-full bg-black/60 backdrop-blur-md text-white border-white/20 text-[11px] font-medium px-2.5 py-0.5 shadow-sm"
+                className="rounded-full bg-black/60 backdrop-blur-md text-white border-white/20 text-[9px] sm:text-[11px] font-medium px-2 sm:px-2.5 py-0.5 shadow-sm"
               >
                 {categoryLabel(project.category)}
               </Badge>
@@ -653,13 +653,13 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           </div>
         </GalleryDialog>
       ) : (
-        <div className="aspect-[16/10] sm:aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-500 relative">
-          <ImageIcon />
+        <div className="aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-500 relative">
+          <ImageIcon size={20} />
 
-          <div className="absolute right-3 top-3">
+          <div className="absolute right-2 top-2 sm:right-3 sm:top-3">
             <Badge
               variant="outline"
-              className="rounded-full bg-black/60 backdrop-blur-md text-white border-white/20 text-[11px] font-medium px-2.5 py-0.5 shadow-sm"
+              className="rounded-full bg-black/60 backdrop-blur-md text-white border-white/20 text-[9px] sm:text-[11px] font-medium px-2 sm:px-2.5 py-0.5 shadow-sm"
             >
               {categoryLabel(project.category)}
             </Badge>
@@ -667,30 +667,27 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         </div>
       )}
 
-      <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between">
+      <div className="p-2.5 sm:p-5 flex flex-col flex-1 justify-between">
         <div>
-          <h3 className="text-lg sm:text-xl font-bold mb-1.5 text-zinc-900 dark:text-white line-clamp-1 group-hover:text-blue-500 transition-colors">
+          <h3 className="text-xs sm:text-base md:text-lg font-bold mb-1 sm:mb-1.5 text-zinc-900 dark:text-white line-clamp-1 group-hover:text-blue-500 transition-colors">
             {project.title}
           </h3>
 
           {tools.length > 0 && (
-            <div className="mt-2">
-              <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-1">
-                Tools
-              </div>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {tools.slice(0, 3).map((tool, i) => (
+            <div className="mt-1 sm:mt-2">
+              <div className="flex items-center gap-1 flex-wrap">
+                {tools.slice(0, 2).map((tool, i) => (
                   <Badge
                     key={`tool-${tool}-${i}`}
                     variant="outline"
-                    className="text-[11px] px-2.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium"
+                    className="text-[9px] sm:text-xs px-1.5 py-0.2 sm:px-2 sm:py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium leading-normal"
                   >
                     {tool}
                   </Badge>
                 ))}
-                {tools.length > 3 && (
-                  <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200/60 dark:border-zinc-700/40">
-                    +{tools.length - 3}
+                {tools.length > 2 && (
+                  <span className="text-[9px] sm:text-xs font-medium px-1 text-zinc-400 dark:text-zinc-500">
+                    +{tools.length - 2}
                   </span>
                 )}
               </div>
@@ -698,7 +695,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           )}
         </div>
 
-        <div className="flex items-center gap-2 pt-4 mt-auto border-t border-zinc-100 dark:border-zinc-800/60">
+        <div className="flex items-center gap-1 sm:gap-2 pt-2 sm:pt-3 mt-2 sm:mt-3 border-t border-zinc-100 dark:border-zinc-800/60">
           {project.links
             .filter((l) => l.kind === 'live')
             .map((l) => (
@@ -707,9 +704,9 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                 href={l.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-semibold transition-all shadow-sm active:scale-95"
+                className="flex-1 inline-flex items-center justify-center gap-1 py-1 sm:py-1.5 px-1.5 sm:px-3 rounded-md bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-900 text-[10px] sm:text-xs font-semibold transition-all shadow-sm active:scale-95"
               >
-                <ExternalLink size={13} /> Live Site
+                <ExternalLink size={11} className="sm:w-3.5 sm:h-3.5" /> <span>Live</span>
               </a>
             ))}
           {project.links
@@ -720,9 +717,10 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                 href={l.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-medium transition-all border border-zinc-200 dark:border-zinc-700 active:scale-95"
+                className="inline-flex items-center justify-center gap-1 py-1 sm:py-1.5 px-1.5 sm:px-2.5 rounded-md bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-[10px] sm:text-xs font-medium transition-all border border-zinc-200 dark:border-zinc-700 active:scale-95"
+                title="GitHub"
               >
-                <Github size={13} /> GitHub
+                <Github size={11} className="sm:w-3.5 sm:h-3.5" /> <span className="hidden sm:inline">GitHub</span>
               </a>
             ))}
           {project.links
@@ -733,9 +731,10 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                 href={l.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-medium transition-all border border-zinc-200 dark:border-zinc-700 active:scale-95"
+                className="inline-flex items-center justify-center gap-1 py-1 sm:py-1.5 px-1.5 sm:px-2.5 rounded-md bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-[10px] sm:text-xs font-medium transition-all border border-zinc-200 dark:border-zinc-700 active:scale-95"
+                title="Behance"
               >
-                <ExternalLink size={13} /> Behance
+                <ExternalLink size={11} className="sm:w-3.5 sm:h-3.5" /> <span className="hidden sm:inline">Behance</span>
               </a>
             ))}
         </div>
@@ -799,11 +798,11 @@ const MotionProjectCard = ({ project, index }: { project: Project; index: number
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800"
+      className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 flex flex-col justify-between"
     >
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <div className="aspect-[16/10] sm:aspect-square overflow-hidden cursor-pointer relative bg-zinc-100 dark:bg-zinc-800">
+          <div className="aspect-square overflow-hidden cursor-pointer relative bg-zinc-100 dark:bg-zinc-800">
             {cover ? (
               <img
                 src={cover}
@@ -812,14 +811,14 @@ const MotionProjectCard = ({ project, index }: { project: Project; index: number
               />
             ) : (
               <div className="w-full h-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-500 dark:text-zinc-400">
-                <ImageIcon />
+                <ImageIcon size={20} />
               </div>
             )}
 
-            <div className="absolute right-3 top-3">
+            <div className="absolute right-2 top-2 sm:right-3 sm:top-3">
               <Badge
                 variant="outline"
-                className="rounded-full bg-black/60 backdrop-blur-md text-white border-white/20 text-[11px] font-medium px-2.5 py-0.5 shadow-sm"
+                className="rounded-full bg-black/60 backdrop-blur-md text-white border-white/20 text-[9px] sm:text-[11px] font-medium px-2 sm:px-2.5 py-0.5 shadow-sm"
               >
                 {categoryLabel(project.category)}
               </Badge>
@@ -1144,34 +1143,42 @@ const MotionProjectCard = ({ project, index }: { project: Project; index: number
         </DialogContent>
       </Dialog>
 
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2 text-zinc-900 dark:text-white">{project.title}</h3>
+      <div className="p-2.5 sm:p-5 flex flex-col flex-1 justify-between">
+        <div>
+          <h3 className="text-xs sm:text-base md:text-lg font-bold mb-1 sm:mb-1.5 text-zinc-900 dark:text-white line-clamp-1">
+            {project.title}
+          </h3>
 
-        {tools.length > 0 && (
-          <div className="mt-3">
-            <div className="text-[11px] font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-              Tools
+          {tools.length > 0 && (
+            <div className="mt-1 sm:mt-2">
+              <div className="flex items-center gap-1 flex-wrap">
+                {tools.slice(0, 2).map((tool, i) => (
+                  <Badge
+                    key={`tool-${tool}-${i}`}
+                    variant="outline"
+                    className="text-[9px] sm:text-xs px-1.5 py-0.2 sm:px-2 sm:py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium leading-normal"
+                  >
+                    {tool}
+                  </Badge>
+                ))}
+                {tools.length > 2 && (
+                  <span className="text-[9px] sm:text-xs font-medium px-1 text-zinc-400 dark:text-zinc-500">
+                    +{tools.length - 2}
+                  </span>
+                )}
+              </div>
             </div>
-            <div className="mt-1 flex flex-wrap gap-1">
-              {tools.slice(0, 10).map((tool, i) => (
-                <Badge
-                  key={`tool-${tool}-${i}`}
-                  variant="outline"
-                  className="text-xs px-2 py-1 rounded-full bg-zinc-100 dark:bg-zinc-950/60 text-zinc-700 dark:text-zinc-200 border-zinc-200 dark:border-zinc-800"
-                >
-                  {tool}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        )}
+          )}
+        </div>
 
         {project.images.length > 0 && (
-          <GalleryDialog project={project}>
-            <Button variant="outline" size="sm" className="rounded-full">
-              View images
-            </Button>
-          </GalleryDialog>
+          <div className="pt-2 sm:pt-3 mt-2 sm:mt-3 border-t border-zinc-100 dark:border-zinc-800/60">
+            <GalleryDialog project={project}>
+              <Button variant="outline" size="sm" className="w-full h-7 sm:h-8 text-[10px] sm:text-xs rounded-md">
+                View images
+              </Button>
+            </GalleryDialog>
+          </div>
         )}
       </div>
     </motion.div>
