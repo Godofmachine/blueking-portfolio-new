@@ -295,31 +295,37 @@ const ProjectsSection = ({ mode = 'featured', projects }: ProjectsSectionProps) 
             className="w-full"
             onValueChange={(v) => setActiveTab(v as ProjectsTab)}
           >
-            <div className="w-full flex justify-center mb-8 overflow-x-auto no-scrollbar px-2 py-1">
-              <TabsList className="flex items-center w-auto bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md p-1.5 sm:p-2 rounded-full border border-zinc-200 dark:border-zinc-800 shadow-sm gap-1 sm:gap-2 shrink-0">
+            <div className="w-full flex justify-start sm:justify-center mb-8 overflow-x-auto no-scrollbar px-3 sm:px-4 py-1.5">
+              <TabsList className="inline-flex items-center w-max bg-zinc-100/90 dark:bg-zinc-900/90 backdrop-blur-md p-1 sm:p-1.5 rounded-full border border-zinc-200/80 dark:border-zinc-800 shadow-sm gap-1 sm:gap-1.5 shrink-0">
                 <TabsTrigger
                   value="all"
-                  className="rounded-full px-3.5 sm:px-4 lg:px-6 py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  className="rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:text-zinc-900 dark:hover:text-zinc-100"
                 >
                   All
                 </TabsTrigger>
                 <TabsTrigger
                   value="development"
-                  className="rounded-full px-3.5 sm:px-4 lg:px-6 py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  className="rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:text-zinc-900 dark:hover:text-zinc-100"
                 >
-                  <Code size={14} className="mr-1.5" /> Web Development
+                  <Code size={13} className="mr-1 sm:mr-1.5" />
+                  <span className="sm:hidden">Web Dev</span>
+                  <span className="hidden sm:inline">Web Development</span>
                 </TabsTrigger>
                 <TabsTrigger
                   value="design"
-                  className="rounded-full px-3.5 sm:px-4 lg:px-6 py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  className="rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:text-zinc-900 dark:hover:text-zinc-100"
                 >
-                  <Palette size={14} className="mr-1.5" /> Graphic Design
+                  <Palette size={13} className="mr-1 sm:mr-1.5" />
+                  <span className="sm:hidden">Design</span>
+                  <span className="hidden sm:inline">Graphic Design</span>
                 </TabsTrigger>
                 <TabsTrigger
                   value="motion"
-                  className="rounded-full px-3.5 sm:px-4 lg:px-6 py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  className="rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:text-zinc-900 dark:hover:text-zinc-100"
                 >
-                  <Video size={14} className="mr-1.5" /> Motion Graphics
+                  <Video size={13} className="mr-1 sm:mr-1.5" />
+                  <span className="sm:hidden">Motion</span>
+                  <span className="hidden sm:inline">Motion Graphics</span>
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -621,6 +627,100 @@ function ProjectsGrid({
   );
 }
 
+const ProjectToolsRow = ({ tools }: { tools: string[] }) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [maxFit, setMaxFit] = React.useState<number>(tools.length);
+
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el || tools.length === 0) return;
+
+    const measure = () => {
+      const containerWidth = el.clientWidth;
+      if (containerWidth <= 0) return;
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const isMobile = window.innerWidth < 640;
+      ctx.font = isMobile ? '500 9px sans-serif' : '500 12px sans-serif';
+
+      const badgePadding = isMobile ? 14 : 18;
+      const gap = 4; // gap-1 is 4px
+
+      const toolWidths = tools.map((t) => Math.ceil(ctx.measureText(t).width) + badgePadding);
+
+      const totalAll = toolWidths.reduce((sum, w, i) => sum + w + (i > 0 ? gap : 0), 0);
+      if (totalAll <= containerWidth) {
+        setMaxFit(tools.length);
+        return;
+      }
+
+      const plusBadgeBase = Math.ceil(ctx.measureText(`+${tools.length}`).width) + badgePadding;
+
+      let currentWidth = 0;
+      let count = 0;
+
+      for (let i = 0; i < toolWidths.length; i++) {
+        const itemWidth = toolWidths[i] + (i > 0 ? gap : 0);
+        const remainingCount = tools.length - (i + 1);
+        const plusWidth = remainingCount > 0 ? gap + plusBadgeBase : 0;
+
+        if (currentWidth + itemWidth + plusWidth <= containerWidth) {
+          currentWidth += itemWidth;
+          count = i + 1;
+        } else {
+          break;
+        }
+      }
+
+      setMaxFit(Math.max(1, count));
+    };
+
+    measure();
+
+    let ro: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(measure);
+      ro.observe(el);
+    }
+
+    window.addEventListener('resize', measure);
+
+    return () => {
+      if (ro) ro.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [tools]);
+
+  if (!tools || tools.length === 0) return null;
+
+  const visibleTools = tools.slice(0, maxFit);
+  const remainingCount = tools.length - maxFit;
+
+  return (
+    <div ref={containerRef} className="mt-1 sm:mt-2 h-5 sm:h-6 overflow-hidden">
+      <div className="flex items-center gap-1 flex-nowrap">
+        {visibleTools.map((tool, i) => (
+          <Badge
+            key={`tool-${tool}-${i}`}
+            variant="outline"
+            className="text-[9px] sm:text-xs px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium leading-none whitespace-nowrap truncate max-w-[110px] sm:max-w-none shrink-0"
+          >
+            {tool}
+          </Badge>
+        ))}
+        {remainingCount > 0 && (
+          <span className="text-[9px] sm:text-xs font-semibold px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-700/60 leading-none whitespace-nowrap shrink-0">
+            +{remainingCount}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   const cover = project.coverImageUrl || project.images[0]?.url;
   const tools = project.tools ?? [];
@@ -673,21 +773,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             {project.title}
           </h3>
 
-          {tools.length > 0 && (
-            <div className="mt-1 sm:mt-2 h-5 sm:h-6 overflow-hidden">
-              <div className="flex items-center gap-1 flex-wrap">
-                {tools.map((tool, i) => (
-                  <Badge
-                    key={`tool-${tool}-${i}`}
-                    variant="outline"
-                    className="text-[9px] sm:text-xs px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium leading-none whitespace-nowrap truncate max-w-[120px] sm:max-w-none shrink-0"
-                  >
-                    {tool}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
+          <ProjectToolsRow tools={tools} />
         </div>
 
         <div className="flex items-center gap-1 sm:gap-2 pt-2 sm:pt-3 mt-2 sm:mt-3 border-t border-zinc-100 dark:border-zinc-800/60">
@@ -1144,21 +1230,7 @@ const MotionProjectCard = ({ project, index }: { project: Project; index: number
             {project.title}
           </h3>
 
-          {tools.length > 0 && (
-            <div className="mt-1 sm:mt-2 h-5 sm:h-6 overflow-hidden">
-              <div className="flex items-center gap-1 flex-wrap">
-                {tools.map((tool, i) => (
-                  <Badge
-                    key={`tool-${tool}-${i}`}
-                    variant="outline"
-                    className="text-[9px] sm:text-xs px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-700/60 font-medium leading-none whitespace-nowrap truncate max-w-[120px] sm:max-w-none shrink-0"
-                  >
-                    {tool}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
+          <ProjectToolsRow tools={tools} />
         </div>
 
         {project.images.length > 0 && (
