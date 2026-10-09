@@ -295,37 +295,35 @@ const ProjectsSection = ({ mode = 'featured', projects }: ProjectsSectionProps) 
             className="w-full"
             onValueChange={(v) => setActiveTab(v as ProjectsTab)}
           >
-            <div className="w-full flex justify-start sm:justify-center mb-8 overflow-x-auto no-scrollbar px-3 sm:px-4 py-1.5">
-              <TabsList className="inline-flex items-center w-max bg-zinc-100/90 dark:bg-zinc-900/90 backdrop-blur-md p-1 sm:p-1.5 rounded-full border border-zinc-200/80 dark:border-zinc-800 shadow-sm gap-1 sm:gap-1.5 shrink-0">
+            <div className="w-full max-w-lg mx-auto px-2 sm:px-4 mb-8">
+              <TabsList className="grid grid-cols-4 w-full h-auto p-1 sm:p-1.5 bg-zinc-100/90 dark:bg-zinc-900/90 backdrop-blur-md rounded-2xl sm:rounded-full border border-zinc-200/80 dark:border-zinc-800 shadow-sm gap-1">
                 <TabsTrigger
                   value="all"
-                  className="rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:text-zinc-900 dark:hover:text-zinc-100"
+                  className="rounded-xl sm:rounded-full py-2 px-1 text-xs sm:text-sm font-medium transition-all duration-200 data-[state=active]:bg-white data-[state=active]:text-zinc-950 dark:data-[state=active]:bg-zinc-800 dark:data-[state=active]:text-white data-[state=active]:shadow-sm data-[state=active]:font-semibold text-zinc-600 dark:text-zinc-400"
                 >
                   All
                 </TabsTrigger>
                 <TabsTrigger
                   value="development"
-                  className="rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:text-zinc-900 dark:hover:text-zinc-100"
+                  className="rounded-xl sm:rounded-full py-2 px-1 text-xs sm:text-sm font-medium transition-all duration-200 data-[state=active]:bg-white data-[state=active]:text-zinc-950 dark:data-[state=active]:bg-zinc-800 dark:data-[state=active]:text-white data-[state=active]:shadow-sm data-[state=active]:font-semibold text-zinc-600 dark:text-zinc-400 flex items-center justify-center gap-1"
                 >
-                  <Code size={13} className="mr-1 sm:mr-1.5" />
-                  <span className="sm:hidden">Web Dev</span>
-                  <span className="hidden sm:inline">Web Development</span>
+                  <Code size={13} className="hidden xs:inline shrink-0" />
+                  <span className="sm:hidden">Web</span>
+                  <span className="hidden sm:inline">Web Dev</span>
                 </TabsTrigger>
                 <TabsTrigger
                   value="design"
-                  className="rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:text-zinc-900 dark:hover:text-zinc-100"
+                  className="rounded-xl sm:rounded-full py-2 px-1 text-xs sm:text-sm font-medium transition-all duration-200 data-[state=active]:bg-white data-[state=active]:text-zinc-950 dark:data-[state=active]:bg-zinc-800 dark:data-[state=active]:text-white data-[state=active]:shadow-sm data-[state=active]:font-semibold text-zinc-600 dark:text-zinc-400 flex items-center justify-center gap-1"
                 >
-                  <Palette size={13} className="mr-1 sm:mr-1.5" />
-                  <span className="sm:hidden">Design</span>
-                  <span className="hidden sm:inline">Graphic Design</span>
+                  <Palette size={13} className="hidden xs:inline shrink-0" />
+                  <span>Design</span>
                 </TabsTrigger>
                 <TabsTrigger
                   value="motion"
-                  className="rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 data-[state=active]:bg-zinc-900 data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-zinc-950 data-[state=active]:shadow-sm hover:text-zinc-900 dark:hover:text-zinc-100"
+                  className="rounded-xl sm:rounded-full py-2 px-1 text-xs sm:text-sm font-medium transition-all duration-200 data-[state=active]:bg-white data-[state=active]:text-zinc-950 dark:data-[state=active]:bg-zinc-800 dark:data-[state=active]:text-white data-[state=active]:shadow-sm data-[state=active]:font-semibold text-zinc-600 dark:text-zinc-400 flex items-center justify-center gap-1"
                 >
-                  <Video size={13} className="mr-1 sm:mr-1.5" />
-                  <span className="sm:hidden">Motion</span>
-                  <span className="hidden sm:inline">Motion Graphics</span>
+                  <Video size={13} className="hidden xs:inline shrink-0" />
+                  <span>Motion</span>
                 </TabsTrigger>
               </TabsList>
             </div>
