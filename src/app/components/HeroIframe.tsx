@@ -8,7 +8,7 @@ export default function HeroIframe() {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data === 'scrollToDesign') {
-        const skillsSection = document.querySelector('#skills-section');
+        const skillsSection = document.querySelector('#skills') || document.querySelector('#skills-section');
         if (skillsSection) {
           skillsSection.scrollIntoView({ behavior: 'smooth' });
           // Dispatch a custom event to change the tab
@@ -16,7 +16,7 @@ export default function HeroIframe() {
           document.dispatchEvent(tabEvent);
         }
       } else if (event.data === 'scrollToDevelopment') {
-        const skillsSection = document.querySelector('#skills-section');
+        const skillsSection = document.querySelector('#skills') || document.querySelector('#skills-section');
         if (skillsSection) {
           skillsSection.scrollIntoView({ behavior: 'smooth' });
           // Dispatch a custom event to change the tab

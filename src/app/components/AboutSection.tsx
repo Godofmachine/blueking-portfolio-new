@@ -51,7 +51,7 @@ const AboutSection = ({ settings }: Props) => {
               <a
                 href={resolveResumeUrl(about?.resumeUrl, STATIC_RESUME_URL)}
                 download
-                className="flex items-center justify-center text-center text-xl w-full px-6 py-6 rounded-lg bg-gradient-to-r from-gray-800 to-zinc-500 text-white font-medium hover:from-gray-700 hover:to-zinc-400 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="flex items-center justify-center text-center text-base sm:text-lg w-full px-5 py-3.5 rounded-xl bg-gradient-to-r from-gray-800 to-zinc-500 text-white font-medium hover:from-gray-700 hover:to-zinc-400 transition-all duration-300 shadow-md hover:shadow-lg active:scale-[0.98]"
               >
                 <svg
                   className="w-5 h-5 mr-2"

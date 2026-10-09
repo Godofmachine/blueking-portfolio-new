@@ -41,7 +41,7 @@ const Footer = ({ settings }: Props) => {
             © {currentYear} {footer?.displayName ?? "Adeniran Samuel"}. All rights reserved.
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap justify-center items-center gap-4">
             {/* Social Media Links */}
             <div className="flex items-center gap-3">
               {/* <a 

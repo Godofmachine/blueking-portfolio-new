@@ -33,12 +33,12 @@ const HeroSection = ({ settings }: Props) => {
           <span className="bg-gradient-to-r from-gray-950 to-gray-800 dark:from-zinc-100 dark:to-zinc-300 bg-clip-text text-transparent text-4xl sm:text-5xl md:text-8xl">{hero?.name ?? "Blueking"}</span>
         </h1>
         
-        <div className="flex flex-col md:flex-row justify-center items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-          <div className="relative px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl md:text-2xl border-b-2 md:border-b-0 md:border-r-2 border-purple-500/30">
+        <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+          <div className="px-4 sm:px-5 py-1.5 sm:py-2 text-sm sm:text-lg md:text-xl rounded-full bg-zinc-100/80 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 font-medium shadow-sm">
             {hero?.roles?.[0] ?? "Graphic Designer"}
-            <div className="hidden md:block absolute h-4 w-4 bg-gray-800 rounded-full -right-[9px] top-1/2 transform -translate-y-1/2"></div>
           </div>
-          <div className="px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl md:text-2xl">
+          <span className="text-zinc-400 hidden sm:inline">•</span>
+          <div className="px-4 sm:px-5 py-1.5 sm:py-2 text-sm sm:text-lg md:text-xl rounded-full bg-zinc-100/80 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 font-medium shadow-sm">
             {hero?.roles?.[1] ?? "Frontend Developer"}
           </div>
         </div>
@@ -49,7 +49,7 @@ const HeroSection = ({ settings }: Props) => {
         
         <button 
           onClick={handleHello}
-          className="group relative inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 font-medium text-white transition-all duration-300 ease-in-out hover:bg-gray-900 rounded-lg bg-zinc-900 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2"
+          className="group relative inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 font-medium text-white transition-all duration-300 ease-in-out hover:bg-gray-900 rounded-lg bg-zinc-900 active:scale-95 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2 shadow-md"
         >
           <span className="relative">{hero?.ctaLabel ?? "Say Hello"}</span>
           <span className="absolute right-4 transition-transform duration-300 transform translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">👋</span>

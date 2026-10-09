@@ -6,6 +6,9 @@ import { BackToTop } from "@/components/BackToTop";
 export const metadata: Metadata = {
   title: "Blueking",
   description: "Graphic Designer & Front end Dev",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

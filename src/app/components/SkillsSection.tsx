@@ -117,11 +117,7 @@ const SkillsSection = () => {
                   {filteredTools.map((tool, index) => (
                     <div 
                       key={index}
-                      className={`px-3 py-1 rounded-full text-sm text-white ${
-                        tool.category === "design" ? "bg-zinc-700" : 
-                        tool.category === "dev" ? "bg-gray-600" : 
-                        "bg-gradient-to-r from-zinc-700 to-gray-600"
-                      }`}
+                      className="px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/60 shadow-sm transition-colors hover:border-zinc-400"
                     >
                       {tool.name}
                     </div>
@@ -170,11 +166,7 @@ const SkillsSection = () => {
                   {filteredTools.map((tool, index) => (
                     <div 
                       key={index}
-                      className={`px-3 py-1 rounded-full text-sm text-white ${
-                        tool.category === "design" ? "bg-zinc-700" : 
-                        tool.category === "dev" ? "bg-gray-600" : 
-                        "bg-gradient-to-r from-zinc-700 to-gray-600"
-                      }`}
+                      className="px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/60 shadow-sm transition-colors hover:border-zinc-400"
                     >
                       {tool.name}
                     </div>

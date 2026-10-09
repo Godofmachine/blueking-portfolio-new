@@ -35,13 +35,13 @@ export const BackToTop = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-white dark:bg-slate-700 shadow-lg flex items-center justify-center group hover:scale-110 transition-transform duration-200"
+          className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white dark:bg-slate-700 shadow-lg flex items-center justify-center group hover:scale-110 transition-transform duration-200"
           style={{
             background: `conic-gradient(#6B7280 ${scrollProgress}%, transparent ${scrollProgress}%)`,
           }}
         >
-          <div className="w-10 h-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
-            <ChevronUp className="w-6 h-6 text-gray-600 dark:text-gray-300 group-hover:text-blue-500 transition-colors" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
+            <ChevronUp className="w-4 h-4 sm:w-6 sm:h-6 text-gray-600 dark:text-gray-300 group-hover:text-blue-500 transition-colors" />
           </div>
         </motion.button>
       )}

@@ -90,18 +90,19 @@ const Header: React.FC<Props> = ({ settings }) => {
   // );
 
   const renderActionButtons = () => (
-    <div className="flex items-center z-[300] mr-4 w-full xl:w-auto">
+    <div className="flex items-center z-[300] mr-2 sm:mr-4 ml-auto xl:w-auto">
       {/* Download Resume Button */}
-      <div className="flex items-center group max-xl:ml-auto mr-2 md:mr-8">
+      <div className="flex items-center group mr-2 sm:mr-3 md:mr-8">
         <a 
           href={resolveResumeUrl(settings?.header?.resumeUrl, STATIC_RESUME_URL)}
           download
-          target='blank'
-          className="flex items-center relative overflow-hidden bg-white/10 hover:bg-white/20 duration-300 ease-out translate-all rounded-full pl-2 sm:pl-4 lg:pl-6 pr-2 py-1.5 sm:py-2"
+          target='_blank'
+          aria-label="Download Resume"
+          className="flex items-center relative overflow-hidden bg-white/10 hover:bg-white/20 duration-300 ease-out transition-all rounded-full p-2 sm:pl-4 sm:pr-2 sm:py-2 lg:pl-6"
         >
-          <div className="text-white text-xs sm:text-sm lg:text-base font-medium pl-1 sm:pl-2 lg:pl-4 pr-2 sm:pr-4 lg:pr-8 relative z-10">Download Resume</div>
-          <div className="ml-auto rounded-full w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 flex items-center justify-center relative z-10">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6">
+          <div className="text-white text-xs sm:text-sm lg:text-base font-medium hidden sm:block sm:pr-2 lg:pr-4 relative z-10 whitespace-nowrap">Download Resume</div>
+          <div className="rounded-full w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 flex items-center justify-center relative z-10">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-4 sm:h-4 lg:w-6 lg:h-6">
               <path d="M12 16L12 8M12 16L8 12M12 16L16 12M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
@@ -129,7 +130,7 @@ const Header: React.FC<Props> = ({ settings }) => {
 
   const renderMobileMenuButton = () => (
     <button 
-      className="xl:hidden w-10 h-10 flex items-center justify-center z-[950] ml-auto me-4"
+      className="xl:hidden w-10 h-10 flex items-center justify-center z-[950] me-2"
       onClick={() => setMobileMenuOpen(true)}
       aria-label="Open mobile menu"
     >
@@ -173,10 +174,10 @@ const Header: React.FC<Props> = ({ settings }) => {
             onClick={() => setMobileMenuOpen(false)}
           >
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40 z-[10000] lg-hidden" />
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-[10000] lg:hidden" />
             {/* Drawer */}
             <div
-              className="relative w-2/3 h-full bg-[#111] z-[10000] lg-hidden flex flex-col"
+              className="relative w-4/5 max-w-xs h-full bg-[#111] z-[10000] lg:hidden flex flex-col border-r border-gray-800"
               onClick={e => e.stopPropagation()}
             >
               {/* Mobile menu header with logo and close button */}
@@ -187,8 +188,9 @@ const Header: React.FC<Props> = ({ settings }) => {
                   </Link>
                 </div>
                 <button 
-                  className="rounded-md p-2 text-white"
+                  className="rounded-md p-2 text-white hover:bg-white/10 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close mobile menu"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -201,34 +203,48 @@ const Header: React.FC<Props> = ({ settings }) => {
                 <nav className="py-2">
                   <div className="border-b border-gray-800" key="home">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <Link href={`${pathname === '/' ? '' : '/'}#home`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Home</Link>
+                      <Link href={`${pathname === '/' ? '' : '/'}#home`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium hover:text-gray-300">Home</Link>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="about">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <Link href={`${pathname === '/' ? '' : '/'}#about`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">About</Link>
+                      <Link href={`${pathname === '/' ? '' : '/'}#about`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium hover:text-gray-300">About</Link>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="projects">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <Link href={`${pathname === '/' ? '' : '/'}#projects`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Projects</Link>
+                      <Link href={`${pathname === '/' ? '' : '/'}#projects`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium hover:text-gray-300">Projects</Link>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="skills">
                     <div className="flex justify-between items-center px-6 py-4">
-                      <Link href={`${pathname === '/' ? '' : '/'}#skills-section`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Skills</Link>
+                      <Link href={`${pathname === '/' ? '' : '/'}#skills-section`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium hover:text-gray-300">Skills</Link>
                     </div>
                   </div>
                   
                   <div className="border-b border-gray-800" key="contact">
                     <div className="px-6 py-4">
-                      <Link href={`${pathname === '/' ? '' : '/'}#contact`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Contact</Link>
+                      <Link href={`${pathname === '/' ? '' : '/'}#contact`} onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium hover:text-gray-300">Contact</Link>
                     </div>
                   </div>
                 </nav>
+
+                <div className="p-6">
+                  <a 
+                    href={resolveResumeUrl(settings?.header?.resumeUrl, STATIC_RESUME_URL)}
+                    download
+                    target="_blank"
+                    className="flex items-center justify-center gap-2.5 w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium border border-white/10 transition-all text-sm shadow-sm"
+                  >
+                    <span>Download Resume</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 16L12 8M12 16L8 12M12 16L16 12M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

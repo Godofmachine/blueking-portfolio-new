@@ -345,8 +345,8 @@ Timeline & Budget:
                       {renderError(errors.email)}
                     </div>
 
-                    <div className="grid grid-cols-12 gap-4">
-                      <div className="col-span-4 relative">
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-4">
+                      <div className="sm:col-span-4 relative">
                         <label className="block text-sm font-medium mb-2 text-gray-700">Country *</label>
                         <div className="relative">
                           <Globe className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
@@ -379,7 +379,7 @@ Timeline & Budget:
                         {renderError(errors.country)}
                       </div>
 
-                      <div className="col-span-8 relative">
+                      <div className="sm:col-span-8 relative">
                         <label className="block text-sm font-medium mb-2 text-gray-700">Phone Number *</label>
                         <div className="relative flex">
                           <div className="relative">
@@ -564,41 +564,47 @@ Timeline & Budget:
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] z-[1000] overflow-y-auto p-8">
-        <DialogHeader className="mb-8">
-          <DialogTitle className="text-3xl font-display font-bold text-gray-900">
+      <DialogContent className="max-w-2xl max-h-[90vh] z-[1000] overflow-y-auto p-5 sm:p-8">
+        <DialogHeader className="mb-6 sm:mb-8">
+          <DialogTitle className="text-2xl sm:text-3xl font-display font-bold text-gray-900">
             Book {config.title}
           </DialogTitle>
         </DialogHeader>
 
         {/* Progress Steps */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 pb-4 sm:pb-0">
           {config.steps.map((step, index) => (
             <div key={step} className="flex items-center flex-1">
-              <div className="relative flex items-center">
+              <div className="relative flex items-center justify-center">
                 <motion.div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300 ${
+                  className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-medium transition-all duration-300 ${
                     index <= currentStep 
                       ? 'bg-black text-white' 
                       : 'bg-gray-100 text-gray-400'
                   }`}
                   whileHover={{ scale: 1.1 }}
                 >
-                  {index < currentStep ? <Check size={18} /> : index + 1}
+                  {index < currentStep ? <Check size={16} /> : index + 1}
                 </motion.div>
-                <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                <div className="hidden sm:block absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
                   <span className={`text-xs font-medium ${index <= currentStep ? 'text-black' : 'text-gray-400'}`}>
                     {step}
                   </span>
                 </div>
               </div>
               {index < config.steps.length - 1 && (
-                <div className={`h-0.5 flex-1 mx-2 transition-all duration-300 ${
+                <div className={`h-0.5 flex-1 mx-1.5 sm:mx-2 transition-all duration-300 ${
                   index < currentStep ? 'bg-black' : 'bg-gray-100'
                 }`} />
               )}
             </div>
           ))}
+        </div>
+        {/* Mobile step label display */}
+        <div className="sm:hidden text-center -mt-4 mb-6">
+          <span className="text-xs font-semibold text-zinc-600 bg-zinc-100 px-3 py-1 rounded-full">
+            Step {currentStep + 1} of {config.steps.length}: {config.steps[currentStep]}
+          </span>
         </div>
 
         {/* Step Content */}
